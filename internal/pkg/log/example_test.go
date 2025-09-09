@@ -13,7 +13,7 @@ func TestLogger(t *testing.T) {
 		Level:             "debug",            // 设置日志级别为 debug
 		Format:            "json",             // 设置日志格式为 JSON
 		DisableCaller:     false,              // 显示调用日志的文件和行号
-		DisableStacktrack: false,              // 允许打印堆栈信息
+		DisableStacktrace: false,              // 允许打印堆栈信息
 		OutputPaths:       []string{"stdout"}, // 将日志输出到标准输出
 	}
 

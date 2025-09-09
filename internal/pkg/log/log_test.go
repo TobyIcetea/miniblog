@@ -14,7 +14,7 @@ func TestMain(m *testing.M) {
 	opts := &Options{
 		Level:             "debug",
 		DisableCaller:     false,
-		DisableStacktrack: false,
+		DisableStacktrace: false,
 		Format:            "json",
 		OutputPaths:       []string{"stdout"},
 	}

@@ -93,7 +93,7 @@ func New(opts *Options) *zapLogger {
 		// 是否在日志中显示调用日志所在的文件和行号，例如 `"caller":"miniblog/miniblog.go:42"`
 		DisableCaller: opts.DisableCaller,
 		// 是否禁止在 panic 及以上级别打印堆栈信息
-		DisableStacktrace: opts.DisableStacktrack,
+		DisableStacktrace: opts.DisableStacktrace,
 		// 指定日志级别
 		Level: zap.NewAtomicLevelAt(zapLevel),
 		// 指定日志显示格式，可选值：console, json

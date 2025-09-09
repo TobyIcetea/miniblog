@@ -9,9 +9,9 @@ type Options struct {
 	// 如果设置为 false（默认值），日志中会显示调用日志所在的文件名和行号，例如 "caller":"main.go:42"
 	DisableCaller bool
 
-	// DisableStacktrack 指定是否禁用堆栈信息
+	// DisableStacktrace 指定是否禁用堆栈信息
 	// 如果设置为 false（默认值），在日志级别为 panic 或更高时，会打印堆栈跟踪信息
-	DisableStacktrack bool
+	DisableStacktrace bool
 
 	// Level 指定日志级别
 	// 可选值包括：debug、info、warn、error、dpanic、panic、fatal
@@ -35,7 +35,7 @@ func NewOptions() *Options {
 		// 默认启用 caller 信息
 		DisableCaller: false,
 		// 默认启用堆栈信息
-		DisableStacktrack: false,
+		DisableStacktrace: false,
 		// 默认日志级别为 info
 		Level: zapcore.InfoLevel.String(),
 		// 默认日志输出格式为 console
