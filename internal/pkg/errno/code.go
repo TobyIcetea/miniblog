@@ -1,3 +1,9 @@
+// Copyright 2025 TobyIcetea <x2406862525@163.com>. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file. The original repo for
+// this file is https://github.com/TobyIcetea/miniblog. The professional
+// version of this repository is https://github.com/onexstack/onex.
+
 package errno
 
 import (
@@ -32,7 +38,7 @@ var (
 	ErrOperationFailed = errorsx.ErrOperationFailed
 
 	// ErrPageNotFound 表示页面未找到
-	ErrPageNotFound = &errorsx.ErrorX{Code: http.StatusNotFound, Reason:"NotFound.PageNotFound", Message: "Page not found."}
+	ErrPageNotFound = &errorsx.ErrorX{Code: http.StatusNotFound, Reason: "NotFound.PageNotFound", Message: "Page not found."}
 
 	// ErrSignToken 标记签发 JWT Token 时出错
 	ErrSignToken = &errorsx.ErrorX{Code: http.StatusUnauthorized, Reason: "Unauthenticated.SignToken", Message: "Error occurred while signing the JSON web token."}

@@ -1,3 +1,9 @@
+// Copyright 2025 TobyIcetea <x2406862525@163.com>. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file. The original repo for
+// this file is https://github.com/TobyIcetea/miniblog. The professional
+// version of this repository is https://github.com/onexstack/onex.
+
 package errno
 
 import (
@@ -9,22 +15,22 @@ import (
 var (
 	// ErrUsernameInvalid 表示用户名不合法
 	ErrUsernameInvalid = &errorsx.ErrorX{
-		Code:   http.StatusBadRequest,
-		Reason: "InvalidArgument.UsernameInvalid",
+		Code:    http.StatusBadRequest,
+		Reason:  "InvalidArgument.UsernameInvalid",
 		Message: "Invalid username: Username must consist of letters, digits, and underscores only, and ",
 	}
 
 	// ErrPasswordInvalid 表示密码不合法
 	ErrPasswordInvalid = &errorsx.ErrorX{
-		Code: http.StatusBadRequest,
-		Reason: "InvalidArgument.PasswordInvalid",
+		Code:    http.StatusBadRequest,
+		Reason:  "InvalidArgument.PasswordInvalid",
 		Message: "Password is incorrect",
 	}
 
 	// ErrUserAlreadyExists 表示用户已存在
 	ErrUserAlreadyExists = &errorsx.ErrorX{
-		Code: http.StatusBadRequest,
-		Reason: "AlreadyExist.UserAlreadyExists",
+		Code:    http.StatusBadRequest,
+		Reason:  "AlreadyExist.UserAlreadyExists",
 		Message: "User already exist.",
 	}
 
