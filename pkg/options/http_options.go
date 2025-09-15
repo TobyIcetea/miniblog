@@ -1,3 +1,9 @@
+// Copyright 2025 TobyIcetea <x2406862525@163.com>. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file. The original repo for
+// this file is https://github.com/TobyIcetea/miniblog. The professional
+// version of this repository is https://github.com/onexstack/onex.
+
 package options
 
 import (
@@ -24,7 +30,7 @@ type HTTPOptions struct {
 func NewHTTPOptions() *HTTPOptions {
 	return &HTTPOptions{
 		Network: "tcp",
-		Addr: "0.0.0.0:38443",
+		Addr:    "0.0.0.0:38443",
 		Timeout: 30 * time.Second,
 	}
 }
@@ -57,4 +63,3 @@ func (o *HTTPOptions) AddFlags(fs *pflag.FlagSet, prefixes ...string) {
 func (s *HTTPOptions) Complete() error {
 	return nil
 }
-

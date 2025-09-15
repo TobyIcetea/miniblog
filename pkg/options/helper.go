@@ -1,15 +1,21 @@
+// Copyright 2025 TobyIcetea <x2406862525@163.com>. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file. The original repo for
+// this file is https://github.com/TobyIcetea/miniblog. The professional
+// version of this repository is https://github.com/onexstack/onex.
+
 package options
 
 import (
 	"fmt"
+	netutils "k8s.io/utils/net"
 	"net"
 	"strings"
-	netutils "k8s.io/utils/net"
 )
 
 // Define unit constant.
 const (
-	_ = iota // ignore first value
+	_   = iota // ignore first value
 	KiB = 1 << (10 * iota)
 	MiB
 	GiB
@@ -25,7 +31,7 @@ func join(prefixes ...string) string {
 	return joined
 }
 
-// ValidateAdress takes an address as a string and validates it 
+// ValidateAdress takes an address as a string and validates it
 // If the input address is not a valid :port or IP:port format, it returns an error
 // It also checks if the host part of the address is a valid IP address and if the port number is valid.
 func ValidateAddress(addr string) error {
