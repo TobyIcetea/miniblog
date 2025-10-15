@@ -10,4 +10,5 @@ go.work.sum
 *.log
 
 # 自定义文件
-/_output
+_output
+_demo
