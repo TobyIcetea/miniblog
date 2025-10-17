@@ -1,0 +1,50 @@
+// Copyright 2025 TobyIcetea <x2406862525@163.com>. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file. The original repo for
+// this file is https://github.com/onexstack/miniblog. The professional
+// version of this repository is https://github.com/onexstack/onex.
+
+syntax = "proto3";
+
+package grpc.gateway.protoc_gen_openapiv2.options;
+
+import "google/protobuf/descriptor.proto";
+import "protoc-gen-openapiv2/options/openapiv2.proto";
+
+option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options";
+
+extend google.protobuf.FileOptions {
+  // ID assigned by protobuf-global-extension-registry@google.com for gRPC-Gateway project.
+  //
+  // All IDs are the same, as assigned. It is okay that they are the same, as they extend
+  // different descriptor messages.
+  Swagger openapiv2_swagger = 1042;
+}
+extend google.protobuf.MethodOptions {
+  // ID assigned by protobuf-global-extension-registry@google.com for gRPC-Gateway project.
+  //
+  // All IDs are the same, as assigned. It is okay that they are the same, as they extend
+  // different descriptor messages.
+  Operation openapiv2_operation = 1042;
+}
+extend google.protobuf.MessageOptions {
+  // ID assigned by protobuf-global-extension-registry@google.com for gRPC-Gateway project.
+  //
+  // All IDs are the same, as assigned. It is okay that they are the same, as they extend
+  // different descriptor messages.
+  Schema openapiv2_schema = 1042;
+}
+extend google.protobuf.ServiceOptions {
+  // ID assigned by protobuf-global-extension-registry@google.com for gRPC-Gateway project.
+  //
+  // All IDs are the same, as assigned. It is okay that they are the same, as they extend
+  // different descriptor messages.
+  Tag openapiv2_tag = 1042;
+}
+extend google.protobuf.FieldOptions {
+  // ID assigned by protobuf-global-extension-registry@google.com for gRPC-Gateway project.
+  //
+  // All IDs are the same, as assigned. It is okay that they are the same, as they extend
+  // different descriptor messages.
+  JSONSchema openapiv2_field = 1042;
+}
