@@ -7,10 +7,9 @@
 package apiserver
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
+	"github.com/TobyIcetea/miniblog/internal/pkg/log"
 	"github.com/spf13/viper"
 )
 
@@ -34,11 +33,8 @@ func (cfg *Config) NewUnionServer() (*UnionServer, error) {
 
 // Run 运行应用
 func (s *UnionServer) Run() error {
-	fmt.Printf("ServerMode from SreverOptions: %s\n", s.cfg.JWTKey)
-	fmt.Printf("ServerMode from Viper: %s\n\n", viper.GetString("jwt-key"))
-
-	jsonData, _ := json.MarshalIndent(s.cfg, "", "  ")
-	fmt.Println(string(jsonData))
+	log.Infow("ServerMode from ServerOptions", "jwt-key", s.cfg.JWTKey)
+	log.Infow("ServerMode from viper", "jwt-key", viper.GetString("jwt-key"))
 
 	select {}
 }
