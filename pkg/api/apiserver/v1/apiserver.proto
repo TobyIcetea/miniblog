@@ -15,7 +15,7 @@ import "apiserver/v1/healthz.proto";  // 健康检查消息定义
 option go_package = "github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1;v1";
 
 // MiniBlog 定义了一个 MiniBlog RPC 服务
-service MiniBog{
+service MiniBlog{
     // Healthz 健康检查
     rpc Healthz(google.protobuf.Empty) returns (HealthzResponse) {}
 }
