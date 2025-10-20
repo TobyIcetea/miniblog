@@ -4,4 +4,4 @@
 // this file is https://github.com/onexstack/miniblog. The professional
 // version of this repository is https://github.com/onexstack/onex.
 
-package version // import "github.com/TobyIceTea/miniblog/pkg/version"
+package version // import "github.com/TobyIcetea/miniblog/pkg/version"

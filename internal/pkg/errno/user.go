@@ -30,7 +30,7 @@ var (
 	// ErrUserAlreadyExists 表示用户已存在
 	ErrUserAlreadyExists = &errorsx.ErrorX{
 		Code:    http.StatusBadRequest,
-		Reason:  "AlreadyExists.UserAlreadyExists",
+		Reason:  "AlreadyExist.UserAlreadyExists",
 		Message: "User already exists",
 	}
 

@@ -11,6 +11,7 @@ import (
 	"errors"
 	"net"
 	"net/http"
+	"strings"
 	"time"
 
 	handler "github.com/TobyIcetea/miniblog/internal/apiserver/handler/grpc"
@@ -85,9 +86,13 @@ func (s *UnionServer) Run() error {
 
 	go s.srv.Serve(s.lis)
 
-	dialOptions := []grpc.DialOption{grpc.WithBlock(), grpc.WithTransportCredentials(insecure.NewCredentials())}
+	dialOptions := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
 
-	conn, err := grpc.NewClient(s.cfg.GRPCOptions.Addr, dialOptions...)
+	grpcAddr := s.cfg.GRPCOptions.Addr
+	if strings.HasPrefix(grpcAddr, ":") {
+		grpcAddr = "localhost" + grpcAddr
+	}
+	conn, err := grpc.NewClient(grpcAddr, dialOptions...)
 	if err != nil {
 		return err
 	}

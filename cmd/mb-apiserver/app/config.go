@@ -52,7 +52,7 @@ func onInitialize() {
 	}
 
 	// 打印当前使用的配置文件，方便调试
-	log.Printf("Useing config file: %s", viper.ConfigFileUsed())
+	log.Printf("Using config file: %s", viper.ConfigFileUsed())
 }
 
 // setupEnvironmentVairables 配置环境变量规则
