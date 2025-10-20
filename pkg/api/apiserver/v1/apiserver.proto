@@ -9,13 +9,63 @@ syntax = "proto3";  // 告诉编译器此文件使用什么版本的语法
 
 package v1;
 
-import "google/protobuf/empty.proto";  // 导入空消息
-import "apiserver/v1/healthz.proto";  // 健康检查消息定义
+// 提供用于定义 HTTP 映射的功能，比如通过 option(google.api.http) 实现 gRPC 到 HTTP 的映射
+import "google/api/annotations.proto";
+// 提供了一个标准的空消息类型 google.protobuf.Empty，适用于 RPC 方法不需要输入消息或输出消息的类型
+import "google/protobuf/empty.proto";
+// 定义当前服务所以来的健康检查消息
+import "apiserver/v1/healthz.proto";
+// 为生成 OpenAPI 文档提供相关注释（如标题、版本、作者、许可证等信息）
+import "protoc-gen-openapiv2/options/annotations.proto";
 
+// 指定协议缓冲区文件生成的 Go 代码所在的包路径
+// 包路径为：github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1，别名为 v1
 option go_package = "github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1;v1";
+
+// OpenAPI 全局配置，提供详细配置信息，用于生成 OpenAPI 文档
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        // API 名称
+        title: "miniblog API";
+        // API 版本
+        version: "1.0";
+        // API 描述
+        description: "";
+        // 开发者的联系方式，包括项目名称、网址和电子邮件
+        contact: {
+            name: "小而美的博客项目";
+            url: "https://github.com/TobyIcetea/miniblog";
+            email: "x2406862525@163.com";
+        };
+        // 可信息和链接（这里使用 MIT License）
+        license: {
+            name: "MIT License";
+            url: "https://github.com/TobyIcetea/miniblog/blob/main/LICENSE";
+        };
+    };
+    // 指定访问协议为 HTTPS
+    schemes: HTTPS;
+    // 定义了服务的请求和响应的数据格式为 application/json
+    consumes: "application/json";
+    produces: "application/json";
+};
 
 // MiniBlog 定义了一个 MiniBlog RPC 服务
 service MiniBlog{
     // Healthz 健康检查
-    rpc Healthz(google.protobuf.Empty) returns (HealthzResponse) {}
+    rpc Healthz(google.protobuf.Empty) returns (HealthzResponse) {
+        // 通过 google.api.http 注释，指定 HTTP 方法为 GET、URL 路径为 /healthz
+        option (google.api.http) = {
+            get: "/healthz",
+        };
+
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            // 在 OpenAPI 文档中的接口简要描述，为“服务健康检查”
+            summary: "服务健康检查";
+            // 标识该操作的唯一 ID，为 “Healthz”
+            operation_id: "Healthz";
+            // 将该接口归类为“服务治理”
+            tags: "服务治理";
+        };
+    }
 }
