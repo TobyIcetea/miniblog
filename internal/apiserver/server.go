@@ -7,22 +7,11 @@
 package apiserver
 
 import (
-	"context"
-	"errors"
-	"net"
-	"net/http"
-	"strings"
 	"time"
 
-	handler "github.com/TobyIcetea/miniblog/internal/apiserver/handler/grpc"
-	"github.com/TobyIcetea/miniblog/internal/pkg/log"
-	apiv1 "github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/TobyIcetea/miniblog/internal/pkg/server"
+	"github.com/onexstack/onexstack/pkg/log"
 	genericoptions "github.com/onexstack/onexstack/pkg/options"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/reflection"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 const (
@@ -58,65 +47,51 @@ type Config struct {
 //
 // HTTP 反向代理服务器依赖 gRPC 服务器，所以在开启 HTTP 反向代理服务器时，会先启动 gRPC 服务器
 type UnionServer struct {
+	srv server.Server
+}
+
+// ServerConfig 包含服务器的核心依赖和配置
+type ServerConfig struct {
 	cfg *Config
-	srv *grpc.Server
-	lis net.Listener
 }
 
 // NewUnionServer 根据配置创建联合服务器
 func (cfg *Config) NewUnionServer() (*UnionServer, error) {
-	lis, err := net.Listen("tcp", cfg.GRPCOptions.Addr)
+	// 一些初始化代码
+
+	// 创建服务器配置，这些配置可用来创建服务器
+	serverConfig, err := cfg.NewServerConfig()
 	if err != nil {
-		log.Fatalw("Failed to listen on %s: %v", cfg.GRPCOptions.Addr, err)
 		return nil, err
 	}
 
-	// 创建 GRPC Server 实例
-	grpcsrv := grpc.NewServer()
-	apiv1.RegisterMiniBlogServer(grpcsrv, handler.NewHandler())
-	reflection.Register(grpcsrv)
+	log.Infow("Initializing federation server", "server-mode", cfg.ServerMode)
 
-	return &UnionServer{cfg: cfg, srv: grpcsrv, lis: lis}, nil
+	// 根据服务模式创建对应的服务实例
+	// 实际企业开发中，可以根据需要只选择一种服务器模式
+	// 这里为了方便展示，通过 cfg.ServerMode 同时支持了 Gin 和 GRPC 2 种服务器模式
+	// 默认为 gRPC 服务器模式
+	var srv server.Server
+	switch cfg.ServerMode {
+	case GinServerMode:
+		srv, err = serverConfig.NewGinServer(), nil
+	default:
+		srv, err = serverConfig.NewGRPCServerOr()
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	return &UnionServer{srv: srv}, nil
 }
 
 // Run 运行应用
 func (s *UnionServer) Run() error {
-	// 打印一条日志，用来提示 GRPC 服务已经起来，方便排障
-	log.Infow("Start to listening the incoming requests on grpc address", "addr", s.cfg.GRPCOptions.Addr)
-
-	go s.srv.Serve(s.lis)
-
-	dialOptions := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-
-	grpcAddr := s.cfg.GRPCOptions.Addr
-	if strings.HasPrefix(grpcAddr, ":") {
-		grpcAddr = "localhost" + grpcAddr
-	}
-	conn, err := grpc.NewClient(grpcAddr, dialOptions...)
-	if err != nil {
-		return err
-	}
-
-	gwmux := runtime.NewServeMux(runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
-		MarshalOptions: protojson.MarshalOptions{
-			// 设置序列化 protobuf 数据时，枚举类型的字段以数字格式输出
-			// 否则默认会以字符串格式输出，跟枚举类型定义不一致，带来理解成本
-			UseEnumNumbers: true,
-		},
-	}))
-	if err := apiv1.RegisterMiniBlogHandler(context.Background(), gwmux, conn); err != nil {
-		return err
-	}
-
-	log.Infow("Start to listening the incoming requests", "protocol", "http", "addr", s.cfg.HTTPOptions.Addr)
-	httpsrv := &http.Server{
-		Addr:    s.cfg.HTTPOptions.Addr,
-		Handler: gwmux,
-	}
-
-	if err := httpsrv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
-		return err
-	}
-
+	s.srv.RunOrDie()
 	return nil
+}
+
+// NewServerConfig 创建一个 *ServerConfig 示例
+func (cfg *Config) NewServerConfig() (*ServerConfig, error) {
+	return &ServerConfig{cfg: cfg}, nil
 }
