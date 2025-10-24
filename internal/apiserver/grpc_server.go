@@ -8,6 +8,7 @@ package apiserver
 
 import (
 	"context"
+	"strings"
 
 	handler "github.com/TobyIcetea/miniblog/internal/apiserver/handler/grpc"
 	"github.com/TobyIcetea/miniblog/internal/pkg/server"
@@ -57,9 +58,15 @@ func (c *ServerConfig) NewGRPCServerOr() (server.Server, error) {
 	// 先启动 gRPC 服务器，因为 HTTP 服务器依赖 gRPC 服务器
 	go grpcsrv.RunOrDie()
 
+	// gRPC-gateway 服务器，是监听 HTTP 端口，拨号 gRPC 服务器
+	// 拨号请求必须使用 ip:port 格式，不能使用 :port 格式，否则会报错
+	grpcOptions := c.cfg.GRPCOptions
+	if strings.HasPrefix(grpcOptions.Addr, ":") {
+		grpcOptions.Addr = "localhost" + grpcOptions.Addr
+	}
 	httpsrv, err := server.NewGRPCGatewayServer(
 		c.cfg.HTTPOptions,
-		c.cfg.GRPCOptions,
+		grpcOptions,
 		func(mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 			return apiv1.RegisterMiniBlogHandler(context.Background(), mux, conn)
 		},
