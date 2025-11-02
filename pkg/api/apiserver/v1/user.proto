@@ -116,6 +116,7 @@ message UpdateUserResponse {
 // DeleteUserRequest 表示删除用户请求
 message DeleteUserRequest {
     // userID 表示用户 ID
+    // @gotags: uri:"userID"
     string userID = 1;
 }
 
@@ -126,6 +127,7 @@ message DeleteUserResponse {
 // GetUserRequest 表示获取用户请求
 message GetUserRequest {
     // userID 表示用户 ID
+    // @gotags: uri:"userID"
     string userID = 1;
 }
 
@@ -138,8 +140,10 @@ message GetUserResponse {
 // ListUserRequest 表示用户列表请求
 message ListUserRequest {
     // offset 表示偏移量
+    // @gotags: form:"offset"
     int64 offset = 1;
     // limit 表示每页数量
+    // @gotags: form:"limit"
     int64 limit = 2;
 }
 

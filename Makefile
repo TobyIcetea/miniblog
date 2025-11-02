@@ -78,4 +78,5 @@ protoc: # 编译 protobuf 文件
 		--openapiv2_out=$(PROJ_ROOT_DIR)/api/openapi \
 		--openapiv2_opt=allow_delete_body=true,logtostderr=true \
 		$(shell find $(APIROOT) -name *.proto)
+	@find . -name "*.pb.go" -exec protoc-go-inject-tag -input={} \;
 	@echo "=============> Generate protobuf files done"
