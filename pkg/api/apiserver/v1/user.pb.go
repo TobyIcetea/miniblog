@@ -13,6 +13,7 @@
 package v1
 
 import (
+	_ "github.com/onexstack/protoc-gen-defaults/defaults"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -980,7 +981,7 @@ var File_apiserver_v1_user_proto protoreflect.FileDescriptor
 
 const file_apiserver_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x17apiserver/v1/user.proto\x12\x02v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x02\n" +
+	"\x17apiserver/v1/user.proto\x12\x02v1\x1a,github.com/onexstack/defaults/defaults.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x02\n" +
 	"\x04User\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
@@ -1004,11 +1005,11 @@ const file_apiserver_v1_user_proto_rawDesc = "" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12 \n" +
 	"\voldPassword\x18\x02 \x01(\tR\voldPassword\x12 \n" +
 	"\vnewPassword\x18\x03 \x01(\tR\vnewPassword\"\x18\n" +
-	"\x16ChangePasswordResponse\"\xa5\x01\n" +
+	"\x16ChangePasswordResponse\"\xb8\x01\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x1f\n" +
-	"\bnickname\x18\x03 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x14\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x122\n" +
+	"\bnickname\x18\x03 \x01(\tB\x11\x9aI\x0er\f你好世界H\x00R\bnickname\x88\x01\x01\x12\x14\n" +
 	"\x05email\x18\x04 \x01(\tR\x05email\x12\x14\n" +
 	"\x05phone\x18\x05 \x01(\tR\x05phoneB\v\n" +
 	"\t_nickname\",\n" +

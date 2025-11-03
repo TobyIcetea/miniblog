@@ -8,6 +8,7 @@ syntax = "proto3";  // 告诉编译器此文件使用什么版本的语法
 
 package v1;
 
+import "github.com/onexstack/defaults/defaults.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1;v1";
@@ -82,7 +83,7 @@ message CreateUserRequest {
     // password 表示用户密码
     string password = 2;
     // nickname 表示用户昵称
-    optional string nickname = 3;
+    optional string nickname = 3 [(defaults.value).string = "你好世界"];
     // email 表示用户电子邮箱
     string email = 4;
     // phone 表示用户手机号
