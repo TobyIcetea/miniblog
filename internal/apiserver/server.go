@@ -18,6 +18,7 @@ import (
 	"github.com/TobyIcetea/miniblog/internal/pkg/contextx"
 	"github.com/TobyIcetea/miniblog/internal/pkg/log"
 	"github.com/TobyIcetea/miniblog/internal/pkg/server"
+	"github.com/TobyIcetea/miniblog/internal/pkg/validation"
 	genericoptions "github.com/onexstack/onexstack/pkg/options"
 	"github.com/onexstack/onexstack/pkg/store/where"
 	"gorm.io/gorm"
@@ -64,6 +65,7 @@ type UnionServer struct {
 type ServerConfig struct {
 	cfg *Config
 	biz biz.IBiz
+	val *validation.Validator
 }
 
 // NewUnionServer 根据配置创建联合服务器
@@ -137,6 +139,7 @@ func (cfg *Config) NewServerConfig() (*ServerConfig, error) {
 	return &ServerConfig{
 		cfg: cfg,
 		biz: biz.NewBiz(store),
+		val: validation.New(store),
 	}, nil
 }
 

@@ -49,7 +49,7 @@ func (c *ServerConfig) InstallRESTAPI(engine *gin.Engine) {
 	InstallGenericAPI(engine)
 
 	// 创建核心业务处理器
-	handler := handler.NewHandler(c.biz)
+	handler := handler.NewHandler(c.biz, c.val)
 
 	// 注册健康检查接口
 	engine.GET("/healthz", handler.Healthz)

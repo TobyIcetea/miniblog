@@ -82,7 +82,7 @@ func (ServiceStatus) EnumDescriptor() ([]byte, []int) {
 type HealthzResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// status 表示服务的健康状态
-	Status ServiceStatus `protobuf:"varint,1,opt,name=status,proto3,enum=v1.ServiceStatus" json:"status,omitempty"`
+	Status ServiceStatus `protobuf:"varint,1,opt,name=status,proto3,enum=miniblog.v1.ServiceStatus" json:"status,omitempty"`
 	// timestamp 表示请求的时间戳
 	Timestamp string `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// message 表示可选的状态消息，描述服务健康的更多信息
@@ -146,9 +146,9 @@ var File_apiserver_v1_healthz_proto protoreflect.FileDescriptor
 
 const file_apiserver_v1_healthz_proto_rawDesc = "" +
 	"\n" +
-	"\x1aapiserver/v1/healthz.proto\x12\x02v1\"t\n" +
-	"\x0fHealthzResponse\x12)\n" +
-	"\x06status\x18\x01 \x01(\x0e2\x11.v1.ServiceStatusR\x06status\x12\x1c\n" +
+	"\x1aapiserver/v1/healthz.proto\x12\vminiblog.v1\"}\n" +
+	"\x0fHealthzResponse\x122\n" +
+	"\x06status\x18\x01 \x01(\x0e2\x1a.miniblog.v1.ServiceStatusR\x06status\x12\x1c\n" +
 	"\ttimestamp\x18\x02 \x01(\tR\ttimestamp\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage*+\n" +
 	"\rServiceStatus\x12\v\n" +
@@ -170,11 +170,11 @@ func file_apiserver_v1_healthz_proto_rawDescGZIP() []byte {
 var file_apiserver_v1_healthz_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_apiserver_v1_healthz_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_apiserver_v1_healthz_proto_goTypes = []any{
-	(ServiceStatus)(0),      // 0: v1.ServiceStatus
-	(*HealthzResponse)(nil), // 1: v1.HealthzResponse
+	(ServiceStatus)(0),      // 0: miniblog.v1.ServiceStatus
+	(*HealthzResponse)(nil), // 1: miniblog.v1.HealthzResponse
 }
 var file_apiserver_v1_healthz_proto_depIdxs = []int32{
-	0, // 0: v1.HealthzResponse.status:type_name -> v1.ServiceStatus
+	0, // 0: miniblog.v1.HealthzResponse.status:type_name -> miniblog.v1.ServiceStatus
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

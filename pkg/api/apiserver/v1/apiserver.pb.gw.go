@@ -526,7 +526,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/Healthz", runtime.WithHTTPPathPattern("/healthz"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/Healthz", runtime.WithHTTPPathPattern("/healthz"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -546,7 +546,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/Login", runtime.WithHTTPPathPattern("/login"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/Login", runtime.WithHTTPPathPattern("/login"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -566,7 +566,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/RefreshToken", runtime.WithHTTPPathPattern("/refresh-token"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/RefreshToken", runtime.WithHTTPPathPattern("/refresh-token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -586,7 +586,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/ChangePassword", runtime.WithHTTPPathPattern("/v1/users/{userID}/change-password"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/ChangePassword", runtime.WithHTTPPathPattern("/v1/users/{userID}/change-password"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -606,7 +606,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/CreateUser", runtime.WithHTTPPathPattern("/v1/users"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/CreateUser", runtime.WithHTTPPathPattern("/v1/users"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -626,7 +626,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/UpdateUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/UpdateUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -646,7 +646,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/DeleteUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/DeleteUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -666,7 +666,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/GetUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/GetUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -686,7 +686,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/ListUser", runtime.WithHTTPPathPattern("/v1/users"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/ListUser", runtime.WithHTTPPathPattern("/v1/users"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -706,7 +706,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/CreatePost", runtime.WithHTTPPathPattern("/v1/posts"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/CreatePost", runtime.WithHTTPPathPattern("/v1/posts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -726,7 +726,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/UpdatePost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/UpdatePost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -746,7 +746,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/DeletePost", runtime.WithHTTPPathPattern("/v1/posts"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/DeletePost", runtime.WithHTTPPathPattern("/v1/posts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -766,7 +766,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/GetPost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/GetPost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -786,7 +786,7 @@ func RegisterMiniBlogHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.MiniBlog/ListPost", runtime.WithHTTPPathPattern("/v1/posts"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/miniblog.v1.MiniBlog/ListPost", runtime.WithHTTPPathPattern("/v1/posts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -844,7 +844,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/Healthz", runtime.WithHTTPPathPattern("/healthz"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/Healthz", runtime.WithHTTPPathPattern("/healthz"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -861,7 +861,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/Login", runtime.WithHTTPPathPattern("/login"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/Login", runtime.WithHTTPPathPattern("/login"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -878,7 +878,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/RefreshToken", runtime.WithHTTPPathPattern("/refresh-token"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/RefreshToken", runtime.WithHTTPPathPattern("/refresh-token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -895,7 +895,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/ChangePassword", runtime.WithHTTPPathPattern("/v1/users/{userID}/change-password"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/ChangePassword", runtime.WithHTTPPathPattern("/v1/users/{userID}/change-password"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -912,7 +912,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/CreateUser", runtime.WithHTTPPathPattern("/v1/users"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/CreateUser", runtime.WithHTTPPathPattern("/v1/users"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -929,7 +929,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/UpdateUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/UpdateUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -946,7 +946,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/DeleteUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/DeleteUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -963,7 +963,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/GetUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/GetUser", runtime.WithHTTPPathPattern("/v1/users/{userID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -980,7 +980,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/ListUser", runtime.WithHTTPPathPattern("/v1/users"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/ListUser", runtime.WithHTTPPathPattern("/v1/users"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -997,7 +997,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/CreatePost", runtime.WithHTTPPathPattern("/v1/posts"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/CreatePost", runtime.WithHTTPPathPattern("/v1/posts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1014,7 +1014,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/UpdatePost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/UpdatePost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1031,7 +1031,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/DeletePost", runtime.WithHTTPPathPattern("/v1/posts"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/DeletePost", runtime.WithHTTPPathPattern("/v1/posts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1048,7 +1048,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/GetPost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/GetPost", runtime.WithHTTPPathPattern("/v1/posts/{postID}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1065,7 +1065,7 @@ func RegisterMiniBlogHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v1.MiniBlog/ListPost", runtime.WithHTTPPathPattern("/v1/posts"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/miniblog.v1.MiniBlog/ListPost", runtime.WithHTTPPathPattern("/v1/posts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

@@ -53,6 +53,9 @@ func NewServerOptions() *ServerOptions {
 	}
 	opts.HTTPOptions.Addr = ":5555"
 	opts.GRPCOptions.Addr = ":6666"
+	opts.MySQLOptions.Username = "miniblog"
+	opts.MySQLOptions.Password = "miniblog1234"
+	opts.MySQLOptions.Database = "miniblog"
 	return opts
 }
 

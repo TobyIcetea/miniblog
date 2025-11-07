@@ -6,7 +6,7 @@
 
 syntax = "proto3";
 
-package v1;
+package miniblog.v1;
 
 import "google/protobuf/timestamp.proto";
 

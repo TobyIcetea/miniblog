@@ -7,7 +7,7 @@
 // MiniBlog API 定义，包含健康检查、用户管理和文章管理的 RPC 接口
 syntax = "proto3";  // 告诉编译器此文件使用什么版本的语法
 
-package v1;
+package miniblog.v1;
 
 // 提供用于定义 HTTP 映射的功能，比如通过 option(google.api.http) 实现 gRPC 到 HTTP 的映射
 import "google/api/annotations.proto";

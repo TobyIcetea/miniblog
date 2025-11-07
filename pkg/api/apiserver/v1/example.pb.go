@@ -105,7 +105,7 @@ type ModifierExample struct {
 	// createdAt 表示创建时间
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	// status 表示用户的当前状态
-	Status        UserStatus `protobuf:"varint,11,opt,name=status,proto3,enum=v1.UserStatus" json:"status,omitempty"`
+	Status        UserStatus `protobuf:"varint,11,opt,name=status,proto3,enum=miniblog.v1.UserStatus" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -214,7 +214,7 @@ var File_apiserver_v1_example_proto protoreflect.FileDescriptor
 
 const file_apiserver_v1_example_proto_rawDesc = "" +
 	"\n" +
-	"\x1aapiserver/v1/example.proto\x12\x02v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbc\x03\n" +
+	"\x1aapiserver/v1/example.proto\x12\vminiblog.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xce\x03\n" +
 	"\x0fModifierExample\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1f\n" +
 	"\bnickname\x18\x03 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
@@ -222,11 +222,11 @@ const file_apiserver_v1_example_proto_rawDesc = "" +
 	"\x06phones\x18\x05 \x03(\tR\x06phones\x12\x18\n" +
 	"\acontent\x18\x06 \x01(\fR\acontent\x12\x14\n" +
 	"\x05money\x18\a \x01(\x05R\x05money\x12\x14\n" +
-	"\x05count\x18\b \x01(\x03R\x05count\x12:\n" +
-	"\aaddress\x18\t \x03(\v2 .v1.ModifierExample.AddressEntryR\aaddress\x128\n" +
+	"\x05count\x18\b \x01(\x03R\x05count\x12C\n" +
+	"\aaddress\x18\t \x03(\v2).miniblog.v1.ModifierExample.AddressEntryR\aaddress\x128\n" +
 	"\tcreatedAt\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12&\n" +
-	"\x06status\x18\v \x01(\x0e2\x0e.v1.UserStatusR\x06status\x1a:\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12/\n" +
+	"\x06status\x18\v \x01(\x0e2\x17.miniblog.v1.UserStatusR\x06status\x1a:\n" +
 	"\fAddressEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01B\v\n" +
@@ -254,15 +254,15 @@ func file_apiserver_v1_example_proto_rawDescGZIP() []byte {
 var file_apiserver_v1_example_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_apiserver_v1_example_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_apiserver_v1_example_proto_goTypes = []any{
-	(UserStatus)(0),               // 0: v1.UserStatus
-	(*ModifierExample)(nil),       // 1: v1.ModifierExample
-	nil,                           // 2: v1.ModifierExample.AddressEntry
+	(UserStatus)(0),               // 0: miniblog.v1.UserStatus
+	(*ModifierExample)(nil),       // 1: miniblog.v1.ModifierExample
+	nil,                           // 2: miniblog.v1.ModifierExample.AddressEntry
 	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_apiserver_v1_example_proto_depIdxs = []int32{
-	2, // 0: v1.ModifierExample.address:type_name -> v1.ModifierExample.AddressEntry
-	3, // 1: v1.ModifierExample.createdAt:type_name -> google.protobuf.Timestamp
-	0, // 2: v1.ModifierExample.status:type_name -> v1.UserStatus
+	2, // 0: miniblog.v1.ModifierExample.address:type_name -> miniblog.v1.ModifierExample.AddressEntry
+	3, // 1: miniblog.v1.ModifierExample.createdAt:type_name -> google.protobuf.Timestamp
+	0, // 2: miniblog.v1.ModifierExample.status:type_name -> miniblog.v1.UserStatus
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

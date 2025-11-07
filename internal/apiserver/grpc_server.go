@@ -15,6 +15,7 @@ import (
 	"github.com/TobyIcetea/miniblog/internal/pkg/server"
 	apiv1 "github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/onexstack/onexstack/pkg/validation"
 	"google.golang.org/grpc"
 )
 
@@ -46,6 +47,8 @@ func (c *ServerConfig) NewGRPCServerOr() (server.Server, error) {
 			mw.AuthnBypassInterceptor(),
 			// 请求默认值设置拦截器
 			mw.DefaulterInterceptor(),
+			// 数据校验拦截器
+			mw.ValidatorInterceptor(validation.NewValidator(c.val)),
 		),
 	}
 

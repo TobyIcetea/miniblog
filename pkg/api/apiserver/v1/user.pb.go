@@ -981,7 +981,7 @@ var File_apiserver_v1_user_proto protoreflect.FileDescriptor
 
 const file_apiserver_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x17apiserver/v1/user.proto\x12\x02v1\x1a,github.com/onexstack/defaults/defaults.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x02\n" +
+	"\x17apiserver/v1/user.proto\x12\vminiblog.v1\x1a,github.com/onexstack/defaults/defaults.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x02\n" +
 	"\x04User\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
@@ -1030,17 +1030,17 @@ const file_apiserver_v1_user_proto_rawDesc = "" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\"\x14\n" +
 	"\x12DeleteUserResponse\"(\n" +
 	"\x0eGetUserRequest\x12\x16\n" +
-	"\x06userID\x18\x01 \x01(\tR\x06userID\"/\n" +
-	"\x0fGetUserResponse\x12\x1c\n" +
-	"\x04user\x18\x01 \x01(\v2\b.v1.UserR\x04user\"?\n" +
+	"\x06userID\x18\x01 \x01(\tR\x06userID\"8\n" +
+	"\x0fGetUserResponse\x12%\n" +
+	"\x04user\x18\x01 \x01(\v2\x11.miniblog.v1.UserR\x04user\"?\n" +
 	"\x0fListUserRequest\x12\x16\n" +
 	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x03R\x05limit\"R\n" +
+	"\x05limit\x18\x02 \x01(\x03R\x05limit\"[\n" +
 	"\x10ListUserResponse\x12\x1e\n" +
 	"\n" +
 	"totalCount\x18\x01 \x01(\x03R\n" +
-	"totalCount\x12\x1e\n" +
-	"\x05users\x18\x02 \x03(\v2\b.v1.UserR\x05usersB8Z6github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1;v1b\x06proto3"
+	"totalCount\x12'\n" +
+	"\x05users\x18\x02 \x03(\v2\x11.miniblog.v1.UserR\x05usersB8Z6github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1;v1b\x06proto3"
 
 var (
 	file_apiserver_v1_user_proto_rawDescOnce sync.Once
@@ -1056,32 +1056,32 @@ func file_apiserver_v1_user_proto_rawDescGZIP() []byte {
 
 var file_apiserver_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_apiserver_v1_user_proto_goTypes = []any{
-	(*User)(nil),                   // 0: v1.User
-	(*LoginRequest)(nil),           // 1: v1.LoginRequest
-	(*LoginResponse)(nil),          // 2: v1.LoginResponse
-	(*RefreshTokenRequest)(nil),    // 3: v1.RefreshTokenRequest
-	(*RefreshTokenResponse)(nil),   // 4: v1.RefreshTokenResponse
-	(*ChangePasswordRequest)(nil),  // 5: v1.ChangePasswordRequest
-	(*ChangePasswordResponse)(nil), // 6: v1.ChangePasswordResponse
-	(*CreateUserRequest)(nil),      // 7: v1.CreateUserRequest
-	(*CreateUserResponse)(nil),     // 8: v1.CreateUserResponse
-	(*UpdateUserRequest)(nil),      // 9: v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),     // 10: v1.UpdateUserResponse
-	(*DeleteUserRequest)(nil),      // 11: v1.DeleteUserRequest
-	(*DeleteUserResponse)(nil),     // 12: v1.DeleteUserResponse
-	(*GetUserRequest)(nil),         // 13: v1.GetUserRequest
-	(*GetUserResponse)(nil),        // 14: v1.GetUserResponse
-	(*ListUserRequest)(nil),        // 15: v1.ListUserRequest
-	(*ListUserResponse)(nil),       // 16: v1.ListUserResponse
+	(*User)(nil),                   // 0: miniblog.v1.User
+	(*LoginRequest)(nil),           // 1: miniblog.v1.LoginRequest
+	(*LoginResponse)(nil),          // 2: miniblog.v1.LoginResponse
+	(*RefreshTokenRequest)(nil),    // 3: miniblog.v1.RefreshTokenRequest
+	(*RefreshTokenResponse)(nil),   // 4: miniblog.v1.RefreshTokenResponse
+	(*ChangePasswordRequest)(nil),  // 5: miniblog.v1.ChangePasswordRequest
+	(*ChangePasswordResponse)(nil), // 6: miniblog.v1.ChangePasswordResponse
+	(*CreateUserRequest)(nil),      // 7: miniblog.v1.CreateUserRequest
+	(*CreateUserResponse)(nil),     // 8: miniblog.v1.CreateUserResponse
+	(*UpdateUserRequest)(nil),      // 9: miniblog.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),     // 10: miniblog.v1.UpdateUserResponse
+	(*DeleteUserRequest)(nil),      // 11: miniblog.v1.DeleteUserRequest
+	(*DeleteUserResponse)(nil),     // 12: miniblog.v1.DeleteUserResponse
+	(*GetUserRequest)(nil),         // 13: miniblog.v1.GetUserRequest
+	(*GetUserResponse)(nil),        // 14: miniblog.v1.GetUserResponse
+	(*ListUserRequest)(nil),        // 15: miniblog.v1.ListUserRequest
+	(*ListUserResponse)(nil),       // 16: miniblog.v1.ListUserResponse
 	(*timestamppb.Timestamp)(nil),  // 17: google.protobuf.Timestamp
 }
 var file_apiserver_v1_user_proto_depIdxs = []int32{
-	17, // 0: v1.User.createdAt:type_name -> google.protobuf.Timestamp
-	17, // 1: v1.User.updatedAt:type_name -> google.protobuf.Timestamp
-	17, // 2: v1.LoginResponse.expireAt:type_name -> google.protobuf.Timestamp
-	17, // 3: v1.RefreshTokenResponse.expireAt:type_name -> google.protobuf.Timestamp
-	0,  // 4: v1.GetUserResponse.user:type_name -> v1.User
-	0,  // 5: v1.ListUserResponse.users:type_name -> v1.User
+	17, // 0: miniblog.v1.User.createdAt:type_name -> google.protobuf.Timestamp
+	17, // 1: miniblog.v1.User.updatedAt:type_name -> google.protobuf.Timestamp
+	17, // 2: miniblog.v1.LoginResponse.expireAt:type_name -> google.protobuf.Timestamp
+	17, // 3: miniblog.v1.RefreshTokenResponse.expireAt:type_name -> google.protobuf.Timestamp
+	0,  // 4: miniblog.v1.GetUserResponse.user:type_name -> miniblog.v1.User
+	0,  // 5: miniblog.v1.ListUserResponse.users:type_name -> miniblog.v1.User
 	6,  // [6:6] is the sub-list for method output_type
 	6,  // [6:6] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name

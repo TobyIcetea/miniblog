@@ -622,7 +622,7 @@ var File_apiserver_v1_post_proto protoreflect.FileDescriptor
 
 const file_apiserver_v1_post_proto_rawDesc = "" +
 	"\n" +
-	"\x17apiserver/v1/post.proto\x12\x02v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xda\x01\n" +
+	"\x17apiserver/v1/post.proto\x12\vminiblog.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xda\x01\n" +
 	"\x04Post\x12\x16\n" +
 	"\x06postID\x18\x01 \x01(\tR\x06postID\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x14\n" +
@@ -647,18 +647,18 @@ const file_apiserver_v1_post_proto_rawDesc = "" +
 	"\apostIDs\x18\x01 \x03(\tR\apostIDs\"\x14\n" +
 	"\x12DeletePostResponse\"(\n" +
 	"\x0eGetPostRequest\x12\x16\n" +
-	"\x06postID\x18\x01 \x01(\tR\x06postID\"/\n" +
-	"\x0fGetPostResponse\x12\x1c\n" +
-	"\x04post\x18\x01 \x01(\v2\b.v1.PostR\x04post\"d\n" +
+	"\x06postID\x18\x01 \x01(\tR\x06postID\"8\n" +
+	"\x0fGetPostResponse\x12%\n" +
+	"\x04post\x18\x01 \x01(\v2\x11.miniblog.v1.PostR\x04post\"d\n" +
 	"\x0fListPostRequest\x12\x16\n" +
 	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x03R\x05limit\x12\x19\n" +
 	"\x05title\x18\x03 \x01(\tH\x00R\x05title\x88\x01\x01B\b\n" +
-	"\x06_title\"S\n" +
+	"\x06_title\"\\\n" +
 	"\x10ListPostResponse\x12\x1f\n" +
 	"\vtotal_count\x18\x01 \x01(\x03R\n" +
-	"totalCount\x12\x1e\n" +
-	"\x05posts\x18\x02 \x03(\v2\b.v1.PostR\x05postsB8Z6github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1;v1b\x06proto3"
+	"totalCount\x12'\n" +
+	"\x05posts\x18\x02 \x03(\v2\x11.miniblog.v1.PostR\x05postsB8Z6github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1;v1b\x06proto3"
 
 var (
 	file_apiserver_v1_post_proto_rawDescOnce sync.Once
@@ -674,24 +674,24 @@ func file_apiserver_v1_post_proto_rawDescGZIP() []byte {
 
 var file_apiserver_v1_post_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_apiserver_v1_post_proto_goTypes = []any{
-	(*Post)(nil),                  // 0: v1.Post
-	(*CreatePostRequest)(nil),     // 1: v1.CreatePostRequest
-	(*CreatePostResponse)(nil),    // 2: v1.CreatePostResponse
-	(*UpdatePostRequest)(nil),     // 3: v1.UpdatePostRequest
-	(*UpdatePostResponse)(nil),    // 4: v1.UpdatePostResponse
-	(*DeletePostRequest)(nil),     // 5: v1.DeletePostRequest
-	(*DeletePostResponse)(nil),    // 6: v1.DeletePostResponse
-	(*GetPostRequest)(nil),        // 7: v1.GetPostRequest
-	(*GetPostResponse)(nil),       // 8: v1.GetPostResponse
-	(*ListPostRequest)(nil),       // 9: v1.ListPostRequest
-	(*ListPostResponse)(nil),      // 10: v1.ListPostResponse
+	(*Post)(nil),                  // 0: miniblog.v1.Post
+	(*CreatePostRequest)(nil),     // 1: miniblog.v1.CreatePostRequest
+	(*CreatePostResponse)(nil),    // 2: miniblog.v1.CreatePostResponse
+	(*UpdatePostRequest)(nil),     // 3: miniblog.v1.UpdatePostRequest
+	(*UpdatePostResponse)(nil),    // 4: miniblog.v1.UpdatePostResponse
+	(*DeletePostRequest)(nil),     // 5: miniblog.v1.DeletePostRequest
+	(*DeletePostResponse)(nil),    // 6: miniblog.v1.DeletePostResponse
+	(*GetPostRequest)(nil),        // 7: miniblog.v1.GetPostRequest
+	(*GetPostResponse)(nil),       // 8: miniblog.v1.GetPostResponse
+	(*ListPostRequest)(nil),       // 9: miniblog.v1.ListPostRequest
+	(*ListPostResponse)(nil),      // 10: miniblog.v1.ListPostResponse
 	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
 }
 var file_apiserver_v1_post_proto_depIdxs = []int32{
-	11, // 0: v1.Post.createdAt:type_name -> google.protobuf.Timestamp
-	11, // 1: v1.Post.updatedAt:type_name -> google.protobuf.Timestamp
-	0,  // 2: v1.GetPostResponse.post:type_name -> v1.Post
-	0,  // 3: v1.ListPostResponse.posts:type_name -> v1.Post
+	11, // 0: miniblog.v1.Post.createdAt:type_name -> google.protobuf.Timestamp
+	11, // 1: miniblog.v1.Post.updatedAt:type_name -> google.protobuf.Timestamp
+	0,  // 2: miniblog.v1.GetPostResponse.post:type_name -> miniblog.v1.Post
+	0,  // 3: miniblog.v1.ListPostResponse.posts:type_name -> miniblog.v1.Post
 	4,  // [4:4] is the sub-list for method output_type
 	4,  // [4:4] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name

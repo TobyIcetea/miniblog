@@ -28,20 +28,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MiniBlog_Healthz_FullMethodName        = "/v1.MiniBlog/Healthz"
-	MiniBlog_Login_FullMethodName          = "/v1.MiniBlog/Login"
-	MiniBlog_RefreshToken_FullMethodName   = "/v1.MiniBlog/RefreshToken"
-	MiniBlog_ChangePassword_FullMethodName = "/v1.MiniBlog/ChangePassword"
-	MiniBlog_CreateUser_FullMethodName     = "/v1.MiniBlog/CreateUser"
-	MiniBlog_UpdateUser_FullMethodName     = "/v1.MiniBlog/UpdateUser"
-	MiniBlog_DeleteUser_FullMethodName     = "/v1.MiniBlog/DeleteUser"
-	MiniBlog_GetUser_FullMethodName        = "/v1.MiniBlog/GetUser"
-	MiniBlog_ListUser_FullMethodName       = "/v1.MiniBlog/ListUser"
-	MiniBlog_CreatePost_FullMethodName     = "/v1.MiniBlog/CreatePost"
-	MiniBlog_UpdatePost_FullMethodName     = "/v1.MiniBlog/UpdatePost"
-	MiniBlog_DeletePost_FullMethodName     = "/v1.MiniBlog/DeletePost"
-	MiniBlog_GetPost_FullMethodName        = "/v1.MiniBlog/GetPost"
-	MiniBlog_ListPost_FullMethodName       = "/v1.MiniBlog/ListPost"
+	MiniBlog_Healthz_FullMethodName        = "/miniblog.v1.MiniBlog/Healthz"
+	MiniBlog_Login_FullMethodName          = "/miniblog.v1.MiniBlog/Login"
+	MiniBlog_RefreshToken_FullMethodName   = "/miniblog.v1.MiniBlog/RefreshToken"
+	MiniBlog_ChangePassword_FullMethodName = "/miniblog.v1.MiniBlog/ChangePassword"
+	MiniBlog_CreateUser_FullMethodName     = "/miniblog.v1.MiniBlog/CreateUser"
+	MiniBlog_UpdateUser_FullMethodName     = "/miniblog.v1.MiniBlog/UpdateUser"
+	MiniBlog_DeleteUser_FullMethodName     = "/miniblog.v1.MiniBlog/DeleteUser"
+	MiniBlog_GetUser_FullMethodName        = "/miniblog.v1.MiniBlog/GetUser"
+	MiniBlog_ListUser_FullMethodName       = "/miniblog.v1.MiniBlog/ListUser"
+	MiniBlog_CreatePost_FullMethodName     = "/miniblog.v1.MiniBlog/CreatePost"
+	MiniBlog_UpdatePost_FullMethodName     = "/miniblog.v1.MiniBlog/UpdatePost"
+	MiniBlog_DeletePost_FullMethodName     = "/miniblog.v1.MiniBlog/DeletePost"
+	MiniBlog_GetPost_FullMethodName        = "/miniblog.v1.MiniBlog/GetPost"
+	MiniBlog_ListPost_FullMethodName       = "/miniblog.v1.MiniBlog/ListPost"
 )
 
 // MiniBlogClient is the client API for MiniBlog service.
@@ -591,7 +591,7 @@ func _MiniBlog_ListPost_Handler(srv interface{}, ctx context.Context, dec func(i
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MiniBlog_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "v1.MiniBlog",
+	ServiceName: "miniblog.v1.MiniBlog",
 	HandlerType: (*MiniBlogServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

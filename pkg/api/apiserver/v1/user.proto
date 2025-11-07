@@ -6,7 +6,7 @@
 
 syntax = "proto3";  // 告诉编译器此文件使用什么版本的语法
 
-package v1;
+package miniblog.v1;
 
 import "github.com/onexstack/defaults/defaults.proto";
 import "google/protobuf/timestamp.proto";
