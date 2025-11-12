@@ -60,7 +60,7 @@ func New(store store.IStore) *userBiz {
 // Login 实现 UserBiz 接口中的 Login 方法
 func (b *userBiz) Login(ctx context.Context, rq *apiv1.LoginRequest) (*apiv1.LoginResponse, error) {
 	// 获取登录用户的所有信息
-	whr := where.F("usrename", rq.GetUsername())
+	whr := where.F("username", rq.GetUsername())
 	userM, err := b.store.User().Get(ctx, whr)
 	if err != nil {
 		return nil, errno.ErrUserNotFound
