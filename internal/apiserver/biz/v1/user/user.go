@@ -9,7 +9,6 @@ package user
 import (
 	"context"
 	"sync"
-	"time"
 
 	"github.com/TobyIcetea/miniblog/internal/apiserver/model"
 	"github.com/TobyIcetea/miniblog/internal/apiserver/pkg/conversion"
@@ -20,6 +19,7 @@ import (
 	"github.com/TobyIcetea/miniblog/internal/pkg/log"
 	apiv1 "github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1"
 	"github.com/TobyIcetea/miniblog/pkg/auth"
+	"github.com/TobyIcetea/miniblog/pkg/token"
 	"github.com/jinzhu/copier"
 	"github.com/onexstack/onexstack/pkg/store/where"
 	"golang.org/x/sync/errgroup"
@@ -72,16 +72,26 @@ func (b *userBiz) Login(ctx context.Context, rq *apiv1.LoginRequest) (*apiv1.Log
 		return nil, errno.ErrPasswordInvalid
 	}
 
-	// TODO: 实现 Token 签发逻辑
+	// 如果匹配成功，说明登录成功，签发 token 并返回
+	tokenStr, expireAt, err := token.Sign(userM.UserID)
+	if err != nil {
+		log.W(ctx).Errorw("Failed to sign token", "err", err)
+		return nil, errno.ErrSignToken
+	}
 
-	return &apiv1.LoginResponse{Token: "<placeholder>", ExpireAt: timestamppb.New(time.Now().Add(2 * time.Hour))}, nil
+	return &apiv1.LoginResponse{Token: tokenStr, ExpireAt: timestamppb.New(expireAt)}, nil
 }
 
 // RefreshToken 用于刷新用户的身份验证令牌
 // 当用户的令牌即将过期时，可以调用此方法生成一个新的令牌
 func (b *userBiz) RefreshToken(ctx context.Context, rq *apiv1.RefreshTokenRequest) (*apiv1.RefreshTokenResponse, error) {
-	// TODO: 实现 Token 签发逻辑
-	return &apiv1.RefreshTokenResponse{Token: "<placeholder>", ExpireAt: timestamppb.New(time.Now().Add(2 * time.Hour))}, nil
+	tokenStr, expireAt, err := token.Sign(contextx.UserID(ctx))
+	if err != nil {
+		log.W(ctx).Errorw("Failed to sign token", "err", err)
+		return nil, errno.ErrSignToken
+	}
+
+	return &apiv1.RefreshTokenResponse{Token: tokenStr, ExpireAt: timestamppb.New(expireAt)}, nil
 }
 
 // ChangePassword 实现 UserBiz 接口中的 ChangePassword 方法

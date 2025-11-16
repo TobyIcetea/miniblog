@@ -8,8 +8,10 @@ require (
 	github.com/go-kratos/kratos/v2 v2.8.3
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/go-playground/validator/v10 v10.26.0
+	github.com/golang-jwt/jwt/v4 v4.5.1
 	github.com/google/uuid v1.6.0
 	github.com/gosuri/uitable v0.0.4
+	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.3
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.2
 	github.com/jinzhu/copier v0.4.0
 	github.com/onexstack/onexstack v0.0.14
@@ -31,6 +33,10 @@ require (
 	k8s.io/apimachinery v0.34.1
 	k8s.io/utils v0.0.0-20250604170112-4c0f3b243397
 )
+
+// replace cloud.google.com/go/compute/metadata => cloud.google.com/go/compute v1.7.0
+
+exclude cloud.google.com/go/compute/metadata v0.7.0
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect

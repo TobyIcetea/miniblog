@@ -14,6 +14,9 @@ import (
 	mw "github.com/TobyIcetea/miniblog/internal/pkg/middleware/grpc"
 	"github.com/TobyIcetea/miniblog/internal/pkg/server"
 	apiv1 "github.com/TobyIcetea/miniblog/pkg/api/apiserver/v1"
+	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors"
+	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/selector"
+
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/onexstack/onexstack/pkg/validation"
 	"google.golang.org/grpc"
@@ -43,8 +46,8 @@ func (c *ServerConfig) NewGRPCServerOr() (server.Server, error) {
 		grpc.ChainUnaryInterceptor(
 			// 请求 ID 拦截器
 			mw.RequestIDInterceptor(),
-			// Bypass 拦截器，通过所有请求的认证
-			mw.AuthnBypassInterceptor(),
+			// 认证拦截器
+			selector.UnaryServerInterceptor(mw.AuthnInterceptor(c.retriever), NewAuthnWhiteListMatcher()),
 			// 请求默认值设置拦截器
 			mw.DefaulterInterceptor(),
 			// 数据校验拦截器
@@ -110,4 +113,17 @@ func (s *grpcServer) RunOrDie() {
 // GracefulStop 优雅停止 HTTP 和 gRPC 服务器
 func (s *grpcServer) GracefulStop(ctx context.Context) {
 	s.stop(ctx)
+}
+
+// NewAuthnWhiteListMatcher 创建认证白名单匹配器
+func NewAuthnWhiteListMatcher() selector.Matcher {
+	whitelist := map[string]struct{}{
+		apiv1.MiniBlog_Healthz_FullMethodName:    {},
+		apiv1.MiniBlog_CreateUser_FullMethodName: {},
+		apiv1.MiniBlog_Login_FullMethodName:      {},
+	}
+	return selector.MatchFunc(func(ctx context.Context, call interceptors.CallMeta) bool {
+		_, ok := whitelist[call.FullMethod()]
+		return !ok
+	})
 }
