@@ -48,13 +48,14 @@ type UserExpansion interface {
 // userBiz 是 UserBiz 接口的实现
 type userBiz struct {
 	store store.IStore
+	authz *auth.Authz
 }
 
 // 确保 userBiz 实现了 UserBiz 接口
 var _ UserBiz = (*userBiz)(nil)
 
-func New(store store.IStore) *userBiz {
-	return &userBiz{store: store}
+func New(store store.IStore, authz *auth.Authz) *userBiz {
+	return &userBiz{store: store, authz: authz}
 }
 
 // Login 实现 UserBiz 接口中的 Login 方法
@@ -123,6 +124,11 @@ func (b *userBiz) Create(ctx context.Context, rq *apiv1.CreateUserRequest) (*api
 		return nil, err
 	}
 
+	if _, err := b.authz.AddGroupingPolicy(userM.UserID, known.RoleUser); err != nil {
+		log.W(ctx).Errorw("Failed to add grouping policy for user", "user", userM.UserID, "role", known.RoleUser)
+		return nil, errno.ErrAddRole.WithMessage(err.Error())
+	}
+
 	return &apiv1.CreateUserResponse{UserID: userM.UserID}, nil
 }
 
@@ -159,6 +165,11 @@ func (b *userBiz) Delete(ctx context.Context, rq *apiv1.DeleteUserRequest) (*api
 	// 所以这里不用 where.T(), 因为 where.T() 会查询 `root` 用户自己
 	if err := b.store.User().Delete(ctx, where.F("userID", rq.GetUserID())); err != nil {
 		return nil, err
+	}
+
+	if _, err := b.authz.RemoveGroupingPolicy(rq.GetUserID(), known.RoleUser); err != nil {
+		log.W(ctx).Errorw("Failed to remove grouping policy for user", "user", rq.GetUserID(), "role", known.RoleUser)
+		return nil, errno.ErrRemoveRole.WithMessage(err.Error())
 	}
 
 	return &apiv1.DeleteUserResponse{}, nil

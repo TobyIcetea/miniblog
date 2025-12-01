@@ -22,6 +22,7 @@ import (
 	mw "github.com/TobyIcetea/miniblog/internal/pkg/middleware/gin"
 	"github.com/TobyIcetea/miniblog/internal/pkg/server"
 	"github.com/TobyIcetea/miniblog/internal/pkg/validation"
+	"github.com/TobyIcetea/miniblog/pkg/auth"
 	"github.com/TobyIcetea/miniblog/pkg/token"
 	genericoptions "github.com/onexstack/onexstack/pkg/options"
 	"github.com/onexstack/onexstack/pkg/store/where"
@@ -71,6 +72,7 @@ type ServerConfig struct {
 	biz       biz.IBiz
 	val       *validation.Validator
 	retriever mw.UserRetriever
+	authz     *auth.Authz
 }
 
 // NewUnionServer 根据配置创建联合服务器
@@ -144,11 +146,18 @@ func (cfg *Config) NewServerConfig() (*ServerConfig, error) {
 	}
 	store := store.NewStore(db)
 
+	// 初始化权限认证模块
+	authz, err := auth.NewAuthz(store.DB(context.TODO()))
+	if err != nil {
+		return nil, err
+	}
+
 	return &ServerConfig{
 		cfg:       cfg,
-		biz:       biz.NewBiz(store),
+		biz:       biz.NewBiz(store, authz),
 		val:       validation.New(store),
 		retriever: &UserRetriever{store: store},
+		authz:     authz,
 	}, nil
 }
 
