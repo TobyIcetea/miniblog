@@ -60,6 +60,7 @@ func (c *ServerConfig) NewGRPCServerOr() (server.Server, error) {
 	// 创建 gRPC 服务器
 	grpcsrv, err := server.NewGRPCServer(
 		c.cfg.GRPCOptions,
+		c.cfg.TLSOptions,
 		serverOptions,
 		func(s grpc.ServiceRegistrar) {
 			apiv1.RegisterMiniBlogServer(s, handler.NewHandler(c.biz))
@@ -90,6 +91,7 @@ func (c *ServerConfig) NewGRPCServerOr() (server.Server, error) {
 	httpsrv, err := server.NewGRPCGatewayServer(
 		c.cfg.HTTPOptions,
 		grpcOptions,
+		c.cfg.TLSOptions,
 		func(mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 			return apiv1.RegisterMiniBlogHandler(context.Background(), mux, conn)
 		},

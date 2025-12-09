@@ -33,6 +33,8 @@ type ServerOptions struct {
 	JWTKey string `json:"jwt-key" mapstructure:"jwt-key"`
 	// Expiration 定义 JWT Token 的过期时间
 	Expiration time.Duration `json:"expiration" mapstructure:"expiration"`
+	// TLSOptions 包含 TLS 配置选项
+	TLSOptions *genericoptions.TLSOptions `json:"tls" mapstructure:"tls"`
 	// HTTPOptions 包含 HTTP 配置选项
 	HTTPOptions *genericoptions.HTTPOptions `json:"http" mapstructure:"http"`
 	// GRPCOptions 包含 gRPC 配置选项
@@ -47,6 +49,7 @@ func NewServerOptions() *ServerOptions {
 		ServerMode:   apiserver.GRPCGatewayServerMode,
 		JWTKey:       "Rtg8BPKNEf2mB4mgvKONGPZZQSaJWNLijxR42qRgq0iBb5",
 		Expiration:   2 * time.Hour,
+		TLSOptions:   genericoptions.NewTLSOptions(),
 		HTTPOptions:  genericoptions.NewHTTPOptions(),
 		GRPCOptions:  genericoptions.NewGRPCOptions(),
 		MySQLOptions: genericoptions.NewMySQLOptions(),
@@ -67,6 +70,7 @@ func (o *ServerOptions) AddFlags(fs *pflag.FlagSet) {
 	// 绑定 JWT Token 的过期时间选项到命令行标志
 	// 参数名称为 --expiration，默认值为 o.Expiration
 	fs.DurationVar(&o.Expiration, "expiration", o.Expiration, "JWT Token expiration time.")
+	o.TLSOptions.AddFlags(fs)
 	o.HTTPOptions.AddFlags(fs)
 	o.GRPCOptions.AddFlags(fs)
 	o.MySQLOptions.AddFlags(fs)
@@ -87,6 +91,7 @@ func (o *ServerOptions) Validate() error {
 	}
 
 	// 校验子选项
+	errs = append(errs, o.TLSOptions.Validate()...)
 	errs = append(errs, o.HTTPOptions.Validate()...)
 	errs = append(errs, o.MySQLOptions.Validate()...)
 
@@ -105,6 +110,7 @@ func (o *ServerOptions) Config() (*apiserver.Config, error) {
 		ServerMode:   o.ServerMode,
 		JWTKey:       o.JWTKey,
 		Expiration:   o.Expiration,
+		TLSOptions:   o.TLSOptions,
 		HTTPOptions:  o.HTTPOptions,
 		GRPCOptions:  o.GRPCOptions,
 		MySQLOptions: o.MySQLOptions,
