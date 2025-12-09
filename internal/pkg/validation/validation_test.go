@@ -1,0 +1,32 @@
+// Copyright 2025 TobyIcetea <x2406862525@163.com>. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file. The original repo for
+// this file is https://github.com/onexstack/miniblog. The professional
+// version of this repository is https://github.com/onexstack/onex.
+
+package validation
+
+import "testing"
+
+// 性能测试用例
+func BenchmarkIsValidUsername(b *testing.B) {
+	// 定义测试的用户名集合，包含合法和非法的输入
+	testUsernames := []string{
+		"valid_user123",         // 合法，常规输入
+		"user_too_long_example", // 长度超过 20
+		"sh",                    // 长度不足 3
+		"in*vaid",               // 包含非法字符
+		"12345678901234567890",  // 合法，刚好 20 个字符
+	}
+
+	// 重置计时器
+	b.ResetTimer()
+
+	// 性能基准测试
+	for i := 0; i < b.N; i++ {
+		// 模拟不同的测试用例
+		for _, username := range testUsernames {
+			isValidUsername(username)
+		}
+	}
+}
