@@ -7,9 +7,12 @@
 package log
 
 import (
+	"context"
 	"testing"
 
+	"github.com/TobyIcetea/miniblog/internal/pkg/contextx"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/zap"
 )
 
 // MockLogger 用于测试的自定义 Logger
@@ -58,4 +61,20 @@ func TestSync(t *testing.T) {
 	assert.NotPanics(t, func() {
 		Sync() // 确保 Sync 不会引发恐慌
 	}, "Sync should not panic")
+}
+
+// 性能测试用例
+func BenchmarkZapLoggerW(b *testing.B) {
+	// 创建一个 zapLogger 实例（使用 zap.NewNop() 模拟 logger）
+	logger := &zapLogger{z: zap.NewNop()}
+
+	// 创建一个包含上下文值的 context
+	ctx := contextx.WithRequestID(context.Background(), "request-id-12345")
+	ctx = contextx.WithUserID(ctx, "user-id-67890")
+
+	// 重复调用 W 函数，测量性能
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		logger.W(ctx)
+	}
 }
