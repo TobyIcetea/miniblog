@@ -13,31 +13,31 @@ import (
 )
 
 var (
-	// OK 代表请求成功
+	// OK 代表请求成功.
 	OK = &errorsx.ErrorX{Code: http.StatusOK, Message: ""}
 
-	// ErrInternal 表示所有位置的服务器端错误
+	// ErrInternal 表示所有位置的服务器端错误.
 	ErrInternal = errorsx.ErrInternal
 
-	// ErrNotFound 表示资源未找到
+	// ErrNotFound 表示资源未找到.
 	ErrNotFound = errorsx.ErrNotFound
 
-	// ErrBind 表示请求体绑定错误
+	// ErrBind 表示请求体绑定错误.
 	ErrBind = errorsx.ErrBind
 
-	// ErrInvalidArgument 表示参数验证失败
+	// ErrInvalidArgument 表示参数验证失败.
 	ErrInvalidArgument = errorsx.ErrInvalidArgument
 
-	// ErrUnauthenticated 表示认证失败
+	// ErrUnauthenticated 表示认证失败.
 	ErrUnauthenticated = errorsx.ErrUnauthenticated
 
-	// ErrPermissionDenied 表示请求没有权限
+	// ErrPermissionDenied 表示请求没有权限.
 	ErrPermissionDenied = errorsx.ErrPermissionDenied
 
-	// ErrOperationFailed 表示操作失败
+	// ErrOperationFailed 表示操作失败.
 	ErrOperationFailed = errorsx.ErrOperationFailed
 
-	// ErrPageNotFound 表示页面未找到
+	// ErrPageNotFound 表示页面未找到.
 	ErrPageNotFound = &errorsx.ErrorX{Code: http.StatusNotFound, Reason: "NotFound.PageNotFound", Message: "Page not found."}
 
 	// ErrSignToken 表示签发 JWT Token 时出错.

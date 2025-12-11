@@ -18,13 +18,13 @@ import (
 	"github.com/onexstack/onexstack/pkg/log"
 )
 
-// UserRetriever 用于根据用户名获取用户的接口
+// UserRetriever 用于根据用户名获取用户的接口.
 type UserRetriever interface {
 	// GetUser
 	GetUser(ctx context.Context, userID string) (*model.UserM, error)
 }
 
-// AuthnMiddleware 是一个认证中间件，用于从 gin.Context 中提取 token 并验证 token 是否有效
+// AuthnMiddleware 是一个认证中间件，用于从 gin.Context 中提取 token 并验证 token 是否有效.
 func AuthnMiddleware(retriever UserRetriever) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 解析 JWT Token

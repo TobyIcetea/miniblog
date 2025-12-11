@@ -30,19 +30,15 @@ import (
 )
 
 const (
-	// GRPCServerMode 定义 gRPC 服务模式
-	// 使用 gRPC 框架启动一个 gRPC 服务器
+	// 使用 gRPC 框架启动一个 gRPC 服务器.
 	GRPCServerMode = "grpc"
-	// GRPCGatewayServerMode 定义 gRPC + HTTP 服务模式
-	// 使用 gRPC 框架启动一个 gRPC 服务器 + HTTP 反向代理服务器
+	// 使用 gRPC 框架启动一个 gRPC 服务器 + HTTP 反向代理服务器.
 	GRPCGatewayServerMode = "grpc-gateway"
-	// GinServerMode 定义 Gin 服务模式
-	// 使用 Gin Web 框架启动一个 HTTP 服务器
+	// 使用 Gin Web 框架启动一个 HTTP 服务器.
 	GinServerMode = "gin"
 )
 
-// Config 配置结构体，用于存储应用相关的配置
-// 不用 viper.Get，是因为这种方式能更加清晰的知道应用提供了哪些配置项
+// 不用 viper.Get，是因为这种方式能更加清晰的知道应用提供了哪些配置项.
 type Config struct {
 	ServerMode   string
 	JWTKey       string
@@ -53,21 +49,12 @@ type Config struct {
 	MySQLOptions *genericoptions.MySQLOptions
 }
 
-// UnionServer 定义了一个联合服务器。根据 ServerMode 决定要启动的服务器类型
-//
-// 联合服务器分为以下 2 大类：
-//  1. Gin 服务器：由 Gin 框架创建的标准的 REST 服务器。根据是否开启 TLS,
-//     来判断启动 HTTP 或者 HTTPS
-//  2. GRPC 服务器：由 gRPC 框架创建的标准的 RPC 服务器
-//  3. HTTP 反向代理服务器：由 grpc-gateway 框架创建的 HTTP 反向代理服务器
-//     根据是否开启 TLS，来判断启动 HTTP 或者 HTTPS
-//
-// HTTP 反向代理服务器依赖 gRPC 服务器，所以在开启 HTTP 反向代理服务器时，会先启动 gRPC 服务器
+// HTTP 反向代理服务器依赖 gRPC 服务器，所以在开启 HTTP 反向代理服务器时，会先启动 gRPC 服务器.
 type UnionServer struct {
 	srv server.Server
 }
 
-// ServerConfig 包含服务器的核心依赖和配置
+// ServerConfig 包含服务器的核心依赖和配置.
 type ServerConfig struct {
 	cfg       *Config
 	biz       biz.IBiz
@@ -76,7 +63,7 @@ type ServerConfig struct {
 	authz     *auth.Authz
 }
 
-// NewUnionServer 根据配置创建联合服务器
+// NewUnionServer 根据配置创建联合服务器.
 func (cfg *Config) NewUnionServer() (*UnionServer, error) {
 	// 注册租户解析函数，通过上下文获取用户 ID
 	where.RegisterTenant("userID", func(ctx context.Context) string {
@@ -112,7 +99,7 @@ func (cfg *Config) NewUnionServer() (*UnionServer, error) {
 	return &UnionServer{srv: srv}, nil
 }
 
-// Run 运行应用
+// Run 运行应用.
 func (s *UnionServer) Run() error {
 	go s.srv.RunOrDie()
 
@@ -138,7 +125,7 @@ func (s *UnionServer) Run() error {
 	return nil
 }
 
-// NewServerConfig 创建一个 *ServerConfig 示例
+// NewServerConfig 创建一个 *ServerConfig 示例.
 func (cfg *Config) NewServerConfig() (*ServerConfig, error) {
 	// 初始化数据库连接
 	db, err := cfg.NewDB()
@@ -162,17 +149,17 @@ func (cfg *Config) NewServerConfig() (*ServerConfig, error) {
 	}, nil
 }
 
-// NewDB 创建一个 *gorm.DB 实例
+// NewDB 创建一个 *gorm.DB 实例.
 func (cfg *Config) NewDB() (*gorm.DB, error) {
 	return cfg.MySQLOptions.NewDB()
 }
 
-// UserRetriever 定义一个用户数据获取器，用来管理用户信息
+// UserRetriever 定义一个用户数据获取器，用来管理用户信息.
 type UserRetriever struct {
 	store store.IStore
 }
 
-// GetUser 根据用户 ID 获取用户信息
+// GetUser 根据用户 ID 获取用户信息.
 func (r *UserRetriever) GetUser(ctx context.Context, userID string) (*model.UserM, error) {
 	return r.store.User().Get(ctx, where.F("userID", userID))
 }

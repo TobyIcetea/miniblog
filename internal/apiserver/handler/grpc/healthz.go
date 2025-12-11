@@ -15,7 +15,7 @@ import (
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
-// Healthz 服务健康检查
+// Healthz 服务健康检查.
 func (h *Handler) Healthz(ctx context.Context, rq *emptypb.Empty) (*apiv1.HealthzResponse, error) {
 	log.W(ctx).Infow("Healthz handler is called", "method", "Healthz", "status", "healthy")
 	return &apiv1.HealthzResponse{

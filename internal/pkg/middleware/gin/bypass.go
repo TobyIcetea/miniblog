@@ -13,8 +13,7 @@ import (
 	"github.com/onexstack/onexstack/pkg/log"
 )
 
-// AuthnBypassMiddleware 是一个认证中间件
-// 用于从 gin.Context 的 Header 中提取用户 ID，模拟所有请求认证通过
+// 用于从 gin.Context 的 Header 中提取用户 ID，模拟所有请求认证通过.
 func AuthnBypassMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 从 Header 中提取用户 ID，假设请求头名称为 "X-User-ID"

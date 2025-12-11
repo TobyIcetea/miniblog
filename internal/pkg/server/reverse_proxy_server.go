@@ -23,12 +23,12 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
-// GRPCGatewayServer 代表一个 GRPC 网关服务器
+// GRPCGatewayServer 代表一个 GRPC 网关服务器.
 type GRPCGatewayServer struct {
 	srv *http.Server
 }
 
-// NewGRPCGatewayServer 创建一个新的 GRPC 网关服务器实例
+// NewGRPCGatewayServer 创建一个新的 GRPC 网关服务器实例.
 func NewGRPCGatewayServer(
 	httpOptions *genericoptions.HTTPOptions,
 	grpcOptions *genericoptions.GRPCOptions,
@@ -82,7 +82,7 @@ func NewGRPCGatewayServer(
 	}, nil
 }
 
-// RunOrDie 启动 GRPC 网关服务器并在出错时记录致命错误
+// RunOrDie 启动 GRPC 网关服务器并在出错时记录致命错误.
 func (s *GRPCGatewayServer) RunOrDie() {
 	log.Infow("Start to listening the incoming requests", "protocol", protocolName(s.srv), "addr", s.srv.Addr)
 
@@ -97,7 +97,7 @@ func (s *GRPCGatewayServer) RunOrDie() {
 	}
 }
 
-// GracefulStop 优雅地关闭 GRPC 网关服务器
+// GracefulStop 优雅地关闭 GRPC 网关服务器.
 func (s *GRPCGatewayServer) GracefulStop(ctx context.Context) {
 	log.Infow("Gracefully stop grpc gateway server")
 	if err := s.srv.Shutdown(ctx); err != nil {

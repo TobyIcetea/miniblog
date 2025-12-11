@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-// Server 定义所有服务器类型的接口
+// Server 定义所有服务器类型的接口.
 type Server interface {
 	// RunOrDie 运行服务器，如果运行失败会退出程序（OrDie）的含义所在
 	RunOrDie()
@@ -19,7 +19,7 @@ type Server interface {
 	GracefulStop(ctx context.Context)
 }
 
-// protocolName 从 http.Server 中获取协议名
+// protocolName 从 http.Server 中获取协议名.
 func protocolName(server *http.Server) string {
 	if server.TLSConfig != nil {
 		return "https"

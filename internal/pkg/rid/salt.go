@@ -13,7 +13,7 @@ import (
 	"os"
 )
 
-// Salt 计算机器 ID 的哈希值并返回一个 uint64 类型的盐值
+// Salt 计算机器 ID 的哈希值并返回一个 uint64 类型的盐值.
 func Salt() uint64 {
 	// 使用 FNV-1a 哈希算法计算字符串的哈希值
 	hasher := fnv.New64a()
@@ -24,7 +24,7 @@ func Salt() uint64 {
 	return hashValue
 }
 
-// ReadMachineID 获取机器 ID，如果无法获取，则生成随机 ID
+// ReadMachineID 获取机器 ID，如果无法获取，则生成随机 ID.
 func ReadMachineID() []byte {
 	id := make([]byte, 3)
 	machineID, err := readPlatformMachineID()
@@ -46,7 +46,7 @@ func ReadMachineID() []byte {
 	return id
 }
 
-// readPlatformMachineID 尝试读取平台特定的机器 ID
+// readPlatformMachineID 尝试读取平台特定的机器 ID.
 func readPlatformMachineID() (string, error) {
 	data, err := os.ReadFile("/etc/machine-id")
 	if err != nil || len(data) == 0 {

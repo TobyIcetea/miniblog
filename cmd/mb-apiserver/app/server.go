@@ -16,7 +16,7 @@ import (
 
 var configFile string // 配置文件路径
 
-// NewMiniBlogCommand 创建一个 *cobra.Command 对象，用于启动应用程序
+// NewMiniBlogCommand 创建一个 *cobra.Command 对象，用于启动应用程序.
 func NewMiniBlogCommand() *cobra.Command {
 	// 创建默认的应用命令行选项
 	opts := options.NewServerOptions()
@@ -114,8 +114,7 @@ func run(opts *options.ServerOptions) error {
 	return server.Run()
 }
 
-// logOptions 从 viper 中读取日志配置，构建 *log.Options 并返回
-// 注意：viper.Get<Type>() 中 key 的名字需要使用 . 分割，以跟 YAML 中保持相同的缩进
+// 注意：viper.Get<Type>() 中 key 的名字需要使用 . 分割，以跟 YAML 中保持相同的缩进.
 func logOptions() *log.Options {
 	opts := log.NewOptions()
 	if viper.IsSet("log.disable-caller") {

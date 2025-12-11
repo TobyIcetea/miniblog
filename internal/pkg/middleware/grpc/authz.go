@@ -15,12 +15,12 @@ import (
 	"google.golang.org/grpc"
 )
 
-// Authorizer 用于定义授权接口的实现
+// Authorizer 用于定义授权接口的实现.
 type Authorizer interface {
 	Authorize(subject, object, action string) (bool, error)
 }
 
-// AuthzInterceptor 是一个 gRPC 拦截器，用于进行请求授权
+// AuthzInterceptor 是一个 gRPC 拦截器，用于进行请求授权.
 func AuthzInterceptor(authorizer Authorizer) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 		subject := contextx.UserID(ctx) // 获取用户 ID

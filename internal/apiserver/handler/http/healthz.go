@@ -15,7 +15,7 @@ import (
 	"github.com/onexstack/onexstack/pkg/core"
 )
 
-// Healthz 服务健康检查
+// Healthz 服务健康检查.
 func (h *Handler) Healthz(c *gin.Context) {
 	log.W(c.Request.Context()).Infow("Healthz handler is called", "method", "Healthz", "status", "healthy")
 	core.WriteResponse(c, apiv1.HealthzResponse{

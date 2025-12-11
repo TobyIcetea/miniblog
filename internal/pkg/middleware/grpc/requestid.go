@@ -17,7 +17,7 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-// RequestIDInterceptor 是一个 gRPC 拦截器，用户设置请求 ID
+// RequestIDInterceptor 是一个 gRPC 拦截器，用户设置请求 ID.
 func RequestIDInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 		var requestID string

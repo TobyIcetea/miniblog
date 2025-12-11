@@ -13,7 +13,7 @@ import (
 	"github.com/TobyIcetea/miniblog/internal/pkg/errno"
 )
 
-// Validator 是验证逻辑的实现结构体
+// Validator 是验证逻辑的实现结构体.
 type Validator struct {
 	// 有些复杂的验证逻辑，可能需要直接查询数据库
 	// 这里只是一个举例，如果验证时，有其他依赖的客户端/服务/资源等,
@@ -21,7 +21,7 @@ type Validator struct {
 	store store.IStore
 }
 
-// 使用预编译的全局正则表达式，避免重复创建和编译
+// 使用预编译的全局正则表达式，避免重复创建和编译.
 var (
 	lengthRegex = regexp.MustCompile(`^.{3,20}$`)                                        // 长度在 3 到 20 个字符之间
 	validRegex  = regexp.MustCompile(`^[A-Za-z0-9_]+$`)                                  // 仅包含字母、数字和下划线
@@ -31,12 +31,12 @@ var (
 	phoneRegex  = regexp.MustCompile(`^1[3-9]\d{9}$`)                                    // 中国手机号
 )
 
-// New 创建一个新的 Validator 实例
+// New 创建一个新的 Validator 实例.
 func New(store store.IStore) *Validator {
 	return &Validator{store: store}
 }
 
-// isValidUsername 校验用户名是否合法
+// isValidUsername 校验用户名是否合法.
 func isValidUsername(username string) bool {
 	// 校验长度
 	if !lengthRegex.MatchString(username) {
@@ -50,7 +50,7 @@ func isValidUsername(username string) bool {
 	return true
 }
 
-// isValidPassword 判断密码是否符合复杂度要求
+// isValidPassword 判断密码是否符合复杂度要求.
 func isValidPassword(password string) error {
 	// 检查新密码是否为空
 	if password == "" {
@@ -75,7 +75,7 @@ func isValidPassword(password string) error {
 	return nil
 }
 
-// isValidEmail 判断电子邮件是否合法
+// isValidEmail 判断电子邮件是否合法.
 func isValidEmail(email string) error {
 	// 检查电子邮件地址格式
 	if email == "" {
@@ -90,7 +90,7 @@ func isValidEmail(email string) error {
 	return nil
 }
 
-// isValidPhone 判断手机号码是否合法
+// isValidPhone 判断手机号码是否合法.
 func isValidPhone(phone string) error {
 	// 检查手机号码格式
 	if phone == "" {

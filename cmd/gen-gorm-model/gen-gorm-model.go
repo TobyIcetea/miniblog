@@ -18,7 +18,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// 帮助信息文本
+// 帮助信息文本.
 const helpText = `Usage: main [flags] arg [arg...]
 
 This is a pflag example.
@@ -32,13 +32,13 @@ type Querier interface {
 	FilterWithNameAndRole(name string) ([]gen.T, error)
 }
 
-// GenerateConfig 保存代码生成的配置
+// GenerateConfig 保存代码生成的配置.
 type GenerateConfig struct {
 	ModelPackagePath string
 	GenerateFunc     func(g *gen.Generator)
 }
 
-// 预定义的生成配置
+// 预定义的生成配置.
 var generateConfigs = map[string]GenerateConfig{
 	"mb": {
 		ModelPackagePath: "../../internal/apiserver/model",
@@ -46,7 +46,7 @@ var generateConfigs = map[string]GenerateConfig{
 	},
 }
 
-// 命令行参数
+// 命令行参数.
 var (
 	addr       = pflag.StringP("addr", "a", "127.0.0.1:3306", "MySQL host address.")
 	username   = pflag.StringP("username", "u", "miniblog", "Username to connect to the database.")
@@ -83,7 +83,7 @@ func main() {
 	}
 }
 
-// initializeDatabase 创建并返回一个数据库连接
+// initializeDatabase 创建并返回一个数据库连接.
 func initializeDatabase() (*gorm.DB, error) {
 	dbOptions := &db.MySQLOptions{
 		Addr:     *addr,
@@ -94,10 +94,9 @@ func initializeDatabase() (*gorm.DB, error) {
 
 	// 创建并返回数据库连接
 	return db.NewMySQL(dbOptions)
-
 }
 
-// processComponents 处理单个组件以生成代码
+// processComponents 处理单个组件以生成代码.
 func processComponent(component string, dbInstance *gorm.DB) {
 	config, ok := generateConfigs[component]
 	if !ok {
@@ -122,7 +121,7 @@ func processComponent(component string, dbInstance *gorm.DB) {
 	generator.Execute()
 }
 
-// resolveModelPackagePath 确定模型生成的包路径
+// resolveModelPackagePath 确定模型生成的包路径.
 func resolveModelPackagePath(defaultPath string) string {
 	if *modelPath != "" {
 		return *modelPath
@@ -135,7 +134,7 @@ func resolveModelPackagePath(defaultPath string) string {
 	return absPath
 }
 
-// createGenerator 初始化并返回一个新的生成器实例
+// createGenerator 初始化并返回一个新的生成器实例.
 func createGenerator(packagePath string) *gen.Generator {
 	return gen.NewGenerator(gen.Config{
 		Mode:              gen.WithDefaultQuery | gen.WithQueryInterface | gen.WithoutContext,
@@ -148,7 +147,7 @@ func createGenerator(packagePath string) *gen.Generator {
 	})
 }
 
-// applyGeneratorOptions 设置自定义生成器选项
+// applyGeneratorOptions 设置自定义生成器选项.
 func applyGeneratorOptions(g *gen.Generator) {
 	// 为特定字段自定义 GORM 标签
 	g.WithOpts(
@@ -163,7 +162,7 @@ func applyGeneratorOptions(g *gen.Generator) {
 	)
 }
 
-// GenerateMiniBlogModels 为 miniblog 组件生成模型
+// GenerateMiniBlogModels 为 miniblog 组件生成模型.
 func GenerateMiniBlogModels(g *gen.Generator) {
 	g.GenerateModelAs(
 		"user",

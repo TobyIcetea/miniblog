@@ -22,14 +22,14 @@ import (
 	"google.golang.org/grpc"
 )
 
-// grpcServer 定义一个 gRPC 服务器
+// grpcServer 定义一个 gRPC 服务器.
 type grpcServer struct {
 	srv server.Server
 	// stop 为优雅关停函数
 	stop func(context.Context)
 }
 
-// 确保 *grpcServer 实现了 server.Server 接口
+// 确保 *grpcServer 实现了 server.Server 接口.
 var _ server.Server = (*grpcServer)(nil)
 
 // NewGRPCServerOr 创建并初始化 gRPC 或者 gRPC + gRPC-Gateway 服务器
@@ -109,17 +109,17 @@ func (c *ServerConfig) NewGRPCServerOr() (server.Server, error) {
 	}, nil
 }
 
-// RunOrDie 启动 gRPC 服务器或 HTTP 反向代理服务器，异常时退出
+// RunOrDie 启动 gRPC 服务器或 HTTP 反向代理服务器，异常时退出.
 func (s *grpcServer) RunOrDie() {
 	s.srv.RunOrDie()
 }
 
-// GracefulStop 优雅停止 HTTP 和 gRPC 服务器
+// GracefulStop 优雅停止 HTTP 和 gRPC 服务器.
 func (s *grpcServer) GracefulStop(ctx context.Context) {
 	s.stop(ctx)
 }
 
-// NewAuthnWhiteListMatcher 创建认证白名单匹配器
+// NewAuthnWhiteListMatcher 创建认证白名单匹配器.
 func NewAuthnWhiteListMatcher() selector.Matcher {
 	whitelist := map[string]struct{}{
 		apiv1.MiniBlog_Healthz_FullMethodName:    {},
@@ -132,7 +132,7 @@ func NewAuthnWhiteListMatcher() selector.Matcher {
 	})
 }
 
-// NewAuthzWhiteListMatcher 创建授权白名单匹配器
+// NewAuthzWhiteListMatcher 创建授权白名单匹配器.
 func NewAuthzWhiteListMatcher() selector.Matcher {
 	whiteList := map[string]struct{}{
 		apiv1.MiniBlog_Healthz_FullMethodName:    {},

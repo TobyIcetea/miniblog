@@ -17,14 +17,14 @@ import (
 )
 
 const (
-	// defaultHomeDir 定义放置 miniblog 服务配置的默认目录
+	// defaultHomeDir 定义放置 miniblog 服务配置的默认目录.
 	defaultHomeDir = ".miniblog"
 
-	// defaultConfigName 指定 miniblog 服务的默认配置文件名
+	// defaultConfigName 指定 miniblog 服务的默认配置文件名.
 	defaultConfigName = "mb-apiserver.yaml"
 )
 
-// onInitialize 设置需要读取的配置文件名、环境变量，并将其内容读取到 viper 中
+// onInitialize 设置需要读取的配置文件名、环境变量，并将其内容读取到 viper 中.
 func onInitialize() {
 	if configFile != "" {
 		// 从命令行选项指定的配置文件中读取
@@ -55,7 +55,7 @@ func onInitialize() {
 	log.Printf("Using config file: %s", viper.ConfigFileUsed())
 }
 
-// setupEnvironmentVairables 配置环境变量规则
+// setupEnvironmentVairables 配置环境变量规则.
 func setupEnvironmentVariables() {
 	// 允许 viper 自动匹配环境变量
 	viper.AutomaticEnv()
@@ -66,7 +66,7 @@ func setupEnvironmentVariables() {
 	viper.SetEnvKeyReplacer(replacer)
 }
 
-// searchDirs 返回默认的配置文件搜索目录
+// searchDirs 返回默认的配置文件搜索目录.
 func searchDirs() []string {
 	// 获取用户主目录
 	homeDir, err := os.UserHomeDir()
@@ -75,7 +75,7 @@ func searchDirs() []string {
 	return []string{filepath.Join(homeDir, defaultHomeDir), "."}
 }
 
-// filePath 获取默认配置文件的完整路径
+// filePath 获取默认配置文件的完整路径.
 func filePath() string {
 	home, err := os.UserHomeDir()
 	// 如果不能获取用户主目录，则记录错误并返回空路径

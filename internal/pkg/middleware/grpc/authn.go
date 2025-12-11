@@ -18,13 +18,13 @@ import (
 	"google.golang.org/grpc"
 )
 
-// UserRetriever 用于根据用户名获取用户信息的接口
+// UserRetriever 用于根据用户名获取用户信息的接口.
 type UserRetriever interface {
 	// GetUser 根据用户 ID 获取用户信息
 	GetUser(ctx context.Context, usreID string) (*model.UserM, error)
 }
 
-// AuthnInterceptor 是一个 gRPC 拦截器，用于进行认证
+// AuthnInterceptor 是一个 gRPC 拦截器，用于进行认证.
 func AuthnInterceptor(retriever UserRetriever) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 		// 解析 JWT Token

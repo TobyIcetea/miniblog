@@ -19,13 +19,13 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-// GRPCServer 代表一个 GRPC 服务器
+// GRPCServer 代表一个 GRPC 服务器.
 type GRPCServer struct {
 	srv *grpc.Server
 	lis net.Listener
 }
 
-// NewGRPCServer 创建一个新的 GRPC 服务器实例
+// NewGRPCServer 创建一个新的 GRPC 服务器实例.
 func NewGRPCServer(
 	grpcOptions *genericoptions.GRPCOptions,
 	tlsOptions *genericoptions.TLSOptions,
@@ -55,7 +55,7 @@ func NewGRPCServer(
 	}, nil
 }
 
-// RunOrDie 启动 GRPC 服务器并在出错时记录致命错误
+// RunOrDie 启动 GRPC 服务器并在出错时记录致命错误.
 func (s *GRPCServer) RunOrDie() {
 	log.Infow("Start to listening the incoming requests", "protocol", "GRPC", "addr", s.lis.Addr().String())
 	if err := s.srv.Serve(s.lis); err != nil {
@@ -63,13 +63,13 @@ func (s *GRPCServer) RunOrDie() {
 	}
 }
 
-// GracefulStop 优雅地关闭 GRPC 服务器
+// GracefulStop 优雅地关闭 GRPC 服务器.
 func (s *GRPCServer) GracefulStop(ctx context.Context) {
 	log.Infow("Gracefully stop grpc server")
 	s.srv.GracefulStop()
 }
 
-// registerHealthServer 注册健康检查服务
+// registerHealthServer 注册健康检查服务.
 func registerHealthServer(grpcsrv *grpc.Server) {
 	// 创建健康检查服务实例
 	healthServer := health.NewServer()

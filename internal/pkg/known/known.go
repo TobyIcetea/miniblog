@@ -15,23 +15,21 @@ package known
 // 考虑兼容性这里统一将 Header 设置为小写。
 // 另外，Header 的键以 x- 开头，说明是自定义 Header。
 const (
-	// XRequestID 用来定义上下文中的键，代表请求 ID
+	// XRequestID 用来定义上下文中的键，代表请求 ID.
 	XRequestID = "x-request-id"
 
-	// XUserID 用来定义上下文的键，代表请求用户 ID，UserID 整个用户生命周期唯一
+	// XUserID 用来定义上下文的键，代表请求用户 ID，UserID 整个用户生命周期唯一.
 	XUserID = "x-user-id"
 
-	// XUsername 用来定义上下文的键，代表请求用户名
+	// XUsername 用来定义上下文的键，代表请求用户名.
 	XUsername = "x-username"
 )
 
-// 定义其他常量
+// 定义其他常量.
 const (
-	// Admin 用户名
+	// Admin 用户名.
 	AdminUsername = "root"
 
-	// MaxErrGroupConcurrency 定义了 errgroup 的最大并发任务数量
-	// 用于限制 errgroup 中同时执行的 Goroutine 数量，从而防止资源耗尽，提升程序的稳定性
-	// 根据场景需求，可以调整该值大小
+	// 根据场景需求，可以调整该值大小.
 	MaxErrGroupConcurrency = 1000
 )

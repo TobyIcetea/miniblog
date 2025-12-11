@@ -13,8 +13,7 @@ import (
 	"github.com/google/uuid"
 )
 
-// RequestIDMiddleware 是一个 Gin 中间件，用于在每个 HTTP 请求的上下文和
-// 响应中注入 `x-request-id` 键值对
+// 响应中注入 `x-request-id` 键值对.
 func RequestIDMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 从请求头中获取 `x-request-id`，如果不存在则生成新的 UUID

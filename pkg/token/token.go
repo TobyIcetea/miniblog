@@ -20,7 +20,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// Config 包括 token 包的配置选项
+// Config 包括 token 包的配置选项.
 type Config struct {
 	// key 用于签发和解析 token 的密钥
 	key string
@@ -35,7 +35,7 @@ var (
 	once   sync.Once // 确保配置只被初始化一次
 )
 
-// Init 设置包级别的配置 config, config 会用于本包后面的 token 签发和解析
+// Init 设置包级别的配置 config, config 会用于本包后面的 token 签发和解析.
 func Init(key string, identityKey string, expiration time.Duration) {
 	once.Do(func() {
 		if key != "" {
@@ -50,7 +50,7 @@ func Init(key string, identityKey string, expiration time.Duration) {
 	})
 }
 
-// Parse 使用指定的密钥 key 解析 token，解析成功返回 token 上下文，否则报错
+// Parse 使用指定的密钥 key 解析 token，解析成功返回 token 上下文，否则报错.
 func Parse(tokenString string, key string) (string, error) {
 	// 解析 token
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (any, error) {
@@ -82,7 +82,7 @@ func Parse(tokenString string, key string) (string, error) {
 	return identityKey, nil
 }
 
-// ParseRequest 从请求头中获取令牌，并将其传递给 Parse 函数以解析令牌
+// ParseRequest 从请求头中获取令牌，并将其传递给 Parse 函数以解析令牌.
 func ParseRequest(ctx context.Context) (string, error) {
 	var (
 		token string
@@ -110,7 +110,7 @@ func ParseRequest(ctx context.Context) (string, error) {
 	return Parse(token, config.key) // 解析 token
 }
 
-// Sign 使用 jwtSecret 签发 token，token 的 claims 中会存放传入的 subject
+// Sign 使用 jwtSecret 签发 token，token 的 claims 中会存放传入的 subject.
 func Sign(identityKey string) (string, time.Time, error) {
 	// 计算过期时间
 	expireAt := time.Now().Add(config.expiration)

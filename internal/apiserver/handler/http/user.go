@@ -16,37 +16,37 @@ func (h *Handler) Login(c *gin.Context) {
 	core.HandleJSONRequest(c, h.biz.UserV1().Login, h.val.ValidateLoginRequest)
 }
 
-// RefreshToken 刷新 JWT Token
+// RefreshToken 刷新 JWT Token.
 func (h *Handler) RefreshToken(c *gin.Context) {
 	core.HandleJSONRequest(c, h.biz.UserV1().RefreshToken)
 }
 
-// ChangePassword 修改用户密码
+// ChangePassword 修改用户密码.
 func (h *Handler) ChangePassword(c *gin.Context) {
 	core.HandleJSONRequest(c, h.biz.UserV1().ChangePassword, h.val.ValidateChangePasswordRequest)
 }
 
-// CreateUser 创建新用户
+// CreateUser 创建新用户.
 func (h *Handler) CreateUser(c *gin.Context) {
 	core.HandleJSONRequest(c, h.biz.UserV1().Create, h.val.ValidateCreateUserRequest)
 }
 
-// UpdateUser 更新用户信息
+// UpdateUser 更新用户信息.
 func (h *Handler) UpdateUser(c *gin.Context) {
 	core.HandleJSONRequest(c, h.biz.UserV1().Update, h.val.ValidateUpdateUserRequest)
 }
 
-// DeleteUser 删除用户
+// DeleteUser 删除用户.
 func (h *Handler) DeleteUser(c *gin.Context) {
 	core.HandleUriRequest(c, h.biz.UserV1().Delete, h.val.ValidateDeleteUserRequest)
 }
 
-// GetUser 获取用户信息
+// GetUser 获取用户信息.
 func (h *Handler) GetUser(c *gin.Context) {
 	core.HandleUriRequest(c, h.biz.UserV1().Get, h.val.ValidateGetUsreRequest)
 }
 
-// ListUser 列出用户信息
+// ListUser 列出用户信息.
 func (h *Handler) ListUser(c *gin.Context) {
 	core.HandleQueryRequest(c, h.biz.UserV1().List, h.val.ValidateListUserRequest)
 }

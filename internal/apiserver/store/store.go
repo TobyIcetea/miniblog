@@ -16,11 +16,11 @@ import (
 
 var (
 	once sync.Once
-	// 全局变量，方便其他包直接调用已初始化好的 datastore 实例
+	// 全局变量，方便其他包直接调用已初始化好的 datastore 实例.
 	S *datastore
 )
 
-// IStore 定义了 Store 层需要实现的方法
+// IStore 定义了 Store 层需要实现的方法.
 type IStore interface {
 	// 返回 Store 层的 *gorm.DB 实例，在少数场景下会被用到
 	DB(ctx context.Context, wheres ...where.Where) *gorm.DB
@@ -30,10 +30,10 @@ type IStore interface {
 	Post() PostStore
 }
 
-// transactionKey 用于在 context.Context 中存储事务上下文的键
+// transactionKey 用于在 context.Context 中存储事务上下文的键.
 type transactionKey struct{}
 
-// datastore 是 IStore 是具体实现
+// datastore 是 IStore 是具体实现.
 type datastore struct {
 	core *gorm.DB
 
@@ -41,10 +41,10 @@ type datastore struct {
 	// fake *gorm.DB
 }
 
-// 确保 datastore 实现了 IStore 接口
+// 确保 datastore 实现了 IStore 接口.
 var _ IStore = (*datastore)(nil)
 
-// NewStore 创建一个 IStore 类型的实例
+// NewStore 创建一个 IStore 类型的实例.
 func NewStore(db *gorm.DB) *datastore {
 	// 确保 S 只被初始化一次
 	once.Do(func() {
@@ -54,8 +54,7 @@ func NewStore(db *gorm.DB) *datastore {
 	return S
 }
 
-// DB 根据传入的条件（wheres）对数据库实例进行筛选
-// 如果未传入任何条件，则返回上下文中的数据库实例（事务实例或核心数据库实例）
+// 如果未传入任何条件，则返回上下文中的数据库实例（事务实例或核心数据库实例）.
 func (store *datastore) DB(ctx context.Context, wheres ...where.Where) *gorm.DB {
 	db := store.core
 	// 从上下文中提取事务实例
@@ -70,22 +69,22 @@ func (store *datastore) DB(ctx context.Context, wheres ...where.Where) *gorm.DB 
 	return db
 }
 
-// TX 返回一个新的事务实例
+// TX 返回一个新的事务实例.
 func (store *datastore) TX(ctx context.Context, fn func(ctx context.Context) error) error {
 	return store.core.WithContext(ctx).Transaction(
 		func(tx *gorm.DB) error {
-			ctx = context.WithValue(ctx, transactionKey{}, tx)
+			ctx := context.WithValue(ctx, transactionKey{}, tx)
 			return fn(ctx)
 		},
 	)
 }
 
-// Users 返回一个实现了 UserStore 接口的实例
+// Users 返回一个实现了 UserStore 接口的实例.
 func (store *datastore) User() UserStore {
 	return newUserStore(store)
 }
 
-// Posts 返回一个实现了 PostStore 接口的实例
+// Posts 返回一个实现了 PostStore 接口的实例.
 func (store *datastore) Post() PostStore {
 	return newPostStore(store)
 }

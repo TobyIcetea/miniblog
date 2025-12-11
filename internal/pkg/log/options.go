@@ -8,8 +8,7 @@ package log
 
 import "go.uber.org/zap/zapcore"
 
-// Options 定义了日志配置的选项结构体
-// 通过改结构体，可以自定义日志的输出格式、级别以及其他相关配置
+// 通过改结构体，可以自定义日志的输出格式、级别以及其他相关配置.
 type Options struct {
 	// DisableCaller 指定是否禁用 caller 信息
 	// 如果设置为 false（默认值），日志中会显式调用日志所在的文件名和行号
@@ -34,8 +33,7 @@ type Options struct {
 	OutputPaths []string
 }
 
-// NewOptions 创建并返回一个带有默认值的 Options 对象
-// 该方法用于初始化日志配置选项，提供默认的日志级别、格式和输出位置
+// 该方法用于初始化日志配置选项，提供默认的日志级别、格式和输出位置.
 func NewOptions() *Options {
 	return &Options{
 		// 默认启用 caller 信息

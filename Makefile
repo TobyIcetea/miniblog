@@ -104,3 +104,8 @@ ca: # 生成 CA 文件
 	@openssl x509 -days 365 -req -CA $(OUTPUT_DIR)/cert/ca.crt -CAkey $(OUTPUT_DIR)/cert/ca.key \
 		-CAcreateserial -in $(OUTPUT_DIR)/cert/server.csr -out $(OUTPUT_DIR)/cert/server.crt -extensions v3_req \
 		-extfile <(printf "[v3_req]\nsubjectAltName=DNS:localhost,IP:127.0.0.1")
+
+.PHONY: lint
+lint: # 执行静态代码检查
+	@echo "=========> Running golangci to lint source codes"
+	@golangci-lint run -c $(PROJ_ROOT_DIR)/.golangci.yaml $(PROJ_ROOT_DIR)/...

@@ -7,6 +7,7 @@
 package options
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -18,14 +19,14 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 )
 
-// 定义支持的服务器模式集合
+// 定义支持的服务器模式集合.
 var availableServerModes = sets.New(
 	apiserver.GinServerMode,
 	apiserver.GRPCServerMode,
 	apiserver.GRPCGatewayServerMode,
 )
 
-// ServerOptions 包含服务器配置选项
+// ServerOptions 包含服务器配置选项.
 type ServerOptions struct {
 	// ServerMode 定义服务器模式：gRPC、Gin HTTP、HTTP Reverse Proxy
 	ServerMode string `json:"server-mode" mapstructure:"server-mode"`
@@ -43,7 +44,7 @@ type ServerOptions struct {
 	MySQLOptions *genericoptions.MySQLOptions `json:"mysql" mapstructure:"mysql"`
 }
 
-// NewServerOptions 创建带有默认值的 ServerOptions 实例
+// NewServerOptions 创建带有默认值的 ServerOptions 实例.
 func NewServerOptions() *ServerOptions {
 	opts := &ServerOptions{
 		ServerMode:   apiserver.GRPCGatewayServerMode,
@@ -62,8 +63,7 @@ func NewServerOptions() *ServerOptions {
 	return opts
 }
 
-// AddFlags 将 ServerOptions 的选项绑定到命令行标志
-// 通过使用 pflag 包，可以实现从命令行中解析这些选项的功能
+// 通过使用 pflag 包，可以实现从命令行中解析这些选项的功能.
 func (o *ServerOptions) AddFlags(fs *pflag.FlagSet) {
 	fs.StringVar(&o.ServerMode, "server-mode", o.ServerMode, fmt.Sprintf("Server mode, available options: %v", availableServerModes.UnsortedList()))
 	fs.StringVar(&o.JWTKey, "jwt-key", o.JWTKey, "JWT key for authentication. Must be at least 6 characters long.")
@@ -76,7 +76,7 @@ func (o *ServerOptions) AddFlags(fs *pflag.FlagSet) {
 	o.MySQLOptions.AddFlags(fs)
 }
 
-// Validate 校验 ServerOptions 中的选项是否合法
+// Validate 校验 ServerOptions 中的选项是否合法.
 func (o *ServerOptions) Validate() error {
 	errs := []error{}
 
@@ -87,7 +87,7 @@ func (o *ServerOptions) Validate() error {
 
 	// 校验 JWTKey 是否至少 6 个字符长
 	if len(o.JWTKey) < 6 {
-		errs = append(errs, fmt.Errorf("jwt-key must be at least 6 characters long"))
+		errs = append(errs, errors.New("jwt-key must be at least 6 characters long"))
 	}
 
 	// 校验子选项
@@ -104,7 +104,7 @@ func (o *ServerOptions) Validate() error {
 	return utilerrors.NewAggregate(errs)
 }
 
-// Config 基于 ServerOptions 构建 apiserver.Config
+// Config 基于 ServerOptions 构建 apiserver.Config.
 func (o *ServerOptions) Config() (*apiserver.Config, error) {
 	return &apiserver.Config{
 		ServerMode:   o.ServerMode,

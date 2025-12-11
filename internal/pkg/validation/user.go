@@ -64,12 +64,12 @@ func (v *Validator) ValidateUserRules() genericvalidation.Rules {
 	}
 }
 
-// ValidateLoginRequest 校验登录请求
+// ValidateLoginRequest 校验登录请求.
 func (v *Validator) ValidateLoginRequest(ctx context.Context, rq *apiv1.LoginRequest) error {
 	return genericvalidation.ValidateAllFields(rq, v.ValidateUserRules())
 }
 
-// ValidateChangePasswordRequest 校验 ChangePasswordRequest 结构体的有效性
+// ValidateChangePasswordRequest 校验 ChangePasswordRequest 结构体的有效性.
 func (v *Validator) ValidateChangePasswordRequest(ctx context.Context, rq *apiv1.ChangePasswordRequest) error {
 	if rq.GetUserID() != contextx.UserID(ctx) {
 		return errno.ErrPermissionDenied.WithMessage("The logged-in user `%s` does not match request user `%s`", contextx.UserID(ctx), rq.GetUserID())
@@ -77,12 +77,12 @@ func (v *Validator) ValidateChangePasswordRequest(ctx context.Context, rq *apiv1
 	return genericvalidation.ValidateAllFields(rq, v.ValidateUserRules())
 }
 
-// ValidateCreateUserRequest 校验 CreateUserRequest 结构的有效性
+// ValidateCreateUserRequest 校验 CreateUserRequest 结构的有效性.
 func (v *Validator) ValidateCreateUserRequest(ctx context.Context, rq *apiv1.CreateUserRequest) error {
 	return genericvalidation.ValidateAllFields(rq, v.ValidateUserRules())
 }
 
-// ValidateUpdateUserRequest 校验更新用户请求
+// ValidateUpdateUserRequest 校验更新用户请求.
 func (v *Validator) ValidateUpdateUserRequest(ctx context.Context, rq *apiv1.UpdateUserRequest) error {
 	if rq.GetUserID() != contextx.UserID(ctx) {
 		return errno.ErrPermissionDenied.WithMessage("The logged-in user `%s` does not match request user `%s`", contextx.UserID(ctx), rq.GetUserID())
@@ -90,12 +90,12 @@ func (v *Validator) ValidateUpdateUserRequest(ctx context.Context, rq *apiv1.Upd
 	return genericvalidation.ValidateAllFields(rq, v.ValidateUserRules())
 }
 
-// ValidateDateUsrRequest 校验 DeleteUserRequest 结构体的有效性
+// ValidateDateUsrRequest 校验 DeleteUserRequest 结构体的有效性.
 func (v *Validator) ValidateDeleteUserRequest(ctx context.Context, rq *apiv1.DeleteUserRequest) error {
 	return genericvalidation.ValidateAllFields(rq, v.ValidateUserRules())
 }
 
-// ValidateGetUsreRequest 校验 GetUserRequest 结构体的有效性
+// ValidateGetUsreRequest 校验 GetUserRequest 结构体的有效性.
 func (v *Validator) ValidateGetUsreRequest(ctx context.Context, rq *apiv1.GetUserRequest) error {
 	if rq.GetUserID() != contextx.UserID(ctx) {
 		return errno.ErrPermissionDenied.WithMessage("The logged-in user `%s` does not match request user `%s`", contextx.UserID(ctx), rq.GetUserID())
@@ -103,7 +103,7 @@ func (v *Validator) ValidateGetUsreRequest(ctx context.Context, rq *apiv1.GetUse
 	return genericvalidation.ValidateAllFields(rq, v.ValidateUserRules())
 }
 
-// ValidateListUserRequest 校验 ListUserRequest 结构体的有效性
+// ValidateListUserRequest 校验 ListUserRequest 结构体的有效性.
 func (v *Validator) ValidateListUserRequest(ctx context.Context, rq *apiv1.ListUserRequest) error {
 	return genericvalidation.ValidateAllFields(rq, v.ValidateUserRules())
 }

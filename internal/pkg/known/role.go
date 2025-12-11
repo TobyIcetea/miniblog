@@ -7,8 +7,8 @@
 package known
 
 const (
-	// Role for regular users
+	// Role for regular users.
 	RoleUser = "role::user"
-	// Role for administrators
+	// Role for administrators.
 	RoleAdmin = "role::admin"
 )

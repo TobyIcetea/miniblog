@@ -16,7 +16,7 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-// AuthnBypassInterceptor 是一个 gRPC 拦截器，模拟所有请求都通过认证
+// AuthnBypassInterceptor 是一个 gRPC 拦截器，模拟所有请求都通过认证.
 func AuthnBypassInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 		// 从请求头中获取用户 ID

@@ -14,12 +14,12 @@ import (
 	"github.com/onexstack/onexstack/pkg/log"
 )
 
-// Authorizer 用于定义授权接口的实现
+// Authorizer 用于定义授权接口的实现.
 type Authorizer interface {
 	Authorize(subject, object, action string) (bool, error)
 }
 
-// AuthzMiddleware 是一个 Gin 中间件，用于进行请求授权
+// AuthzMiddleware 是一个 Gin 中间件，用于进行请求授权.
 func AuthzMiddleware(authorizer Authorizer) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		subject := contextx.UserID(c.Request.Context())

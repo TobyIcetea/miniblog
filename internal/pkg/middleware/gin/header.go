@@ -13,7 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// NoCache 是一个 Gin 中间件，用于禁止客户端缓存 HTTP 请求的返回结果
+// NoCache 是一个 Gin 中间件，用于禁止客户端缓存 HTTP 请求的返回结果.
 func NoCache(c *gin.Context) {
 	c.Header("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate")
 	c.Header("Expires", "Thu, 01 Jan 1970 00:00:00 GMT")
@@ -21,7 +21,7 @@ func NoCache(c *gin.Context) {
 	c.Next()
 }
 
-// Cors 是一个 Gin 中间件，用于处理 CORS 请求
+// Cors 是一个 Gin 中间件，用于处理 CORS 请求.
 func Cors(c *gin.Context) {
 	// 处理预检请求
 	if c.Request.Method == http.MethodOptions {
@@ -36,7 +36,7 @@ func Cors(c *gin.Context) {
 	c.Next() // 继续处理请求
 }
 
-// Secure 是一个 Gin 中间件，用于添加安全相关的 HTTP 头
+// Secure 是一个 Gin 中间件，用于添加安全相关的 HTTP 头.
 func Secure(c *gin.Context) {
 	c.Header("Header-Control-Allow-Origin", "*")
 	c.Header("X-Frame-Options", "DENY")

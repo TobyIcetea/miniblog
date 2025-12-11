@@ -26,7 +26,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-// UserBiz 定义处理用户请求所需的方法
+// UserBiz 定义处理用户请求所需的方法.
 type UserBiz interface {
 	Create(ctx context.Context, rq *apiv1.CreateUserRequest) (*apiv1.CreateUserResponse, error)
 	Update(ctx context.Context, rq *apiv1.UpdateUserRequest) (*apiv1.UpdateUserResponse, error)
@@ -37,7 +37,7 @@ type UserBiz interface {
 	UserExpansion
 }
 
-// UserExpansion 定义用户操作的扩展方法
+// UserExpansion 定义用户操作的扩展方法.
 type UserExpansion interface {
 	Login(ctx context.Context, rq *apiv1.LoginRequest) (*apiv1.LoginResponse, error)
 	RefreshToken(ctx context.Context, rq *apiv1.RefreshTokenRequest) (*apiv1.RefreshTokenResponse, error)
@@ -45,20 +45,20 @@ type UserExpansion interface {
 	ListWithBadPerformance(ctx context.Context, rq *apiv1.ListUserRequest) (*apiv1.ListUserResponse, error)
 }
 
-// userBiz 是 UserBiz 接口的实现
+// userBiz 是 UserBiz 接口的实现.
 type userBiz struct {
 	store store.IStore
 	authz *auth.Authz
 }
 
-// 确保 userBiz 实现了 UserBiz 接口
+// 确保 userBiz 实现了 UserBiz 接口.
 var _ UserBiz = (*userBiz)(nil)
 
 func New(store store.IStore, authz *auth.Authz) *userBiz {
 	return &userBiz{store: store, authz: authz}
 }
 
-// Login 实现 UserBiz 接口中的 Login 方法
+// Login 实现 UserBiz 接口中的 Login 方法.
 func (b *userBiz) Login(ctx context.Context, rq *apiv1.LoginRequest) (*apiv1.LoginResponse, error) {
 	// 获取登录用户的所有信息
 	whr := where.F("username", rq.GetUsername())
@@ -83,8 +83,7 @@ func (b *userBiz) Login(ctx context.Context, rq *apiv1.LoginRequest) (*apiv1.Log
 	return &apiv1.LoginResponse{Token: tokenStr, ExpireAt: timestamppb.New(expireAt)}, nil
 }
 
-// RefreshToken 用于刷新用户的身份验证令牌
-// 当用户的令牌即将过期时，可以调用此方法生成一个新的令牌
+// 当用户的令牌即将过期时，可以调用此方法生成一个新的令牌.
 func (b *userBiz) RefreshToken(ctx context.Context, rq *apiv1.RefreshTokenRequest) (*apiv1.RefreshTokenResponse, error) {
 	tokenStr, expireAt, err := token.Sign(contextx.UserID(ctx))
 	if err != nil {
@@ -95,7 +94,7 @@ func (b *userBiz) RefreshToken(ctx context.Context, rq *apiv1.RefreshTokenReques
 	return &apiv1.RefreshTokenResponse{Token: tokenStr, ExpireAt: timestamppb.New(expireAt)}, nil
 }
 
-// ChangePassword 实现 UserBiz 接口中的 ChangePassword 方法
+// ChangePassword 实现 UserBiz 接口中的 ChangePassword 方法.
 func (b *userBiz) ChangePassword(ctx context.Context, rq *apiv1.ChangePasswordRequest) (*apiv1.ChangePasswordResponse, error) {
 	userM, err := b.store.User().Get(ctx, where.T(ctx))
 	if err != nil {
@@ -115,7 +114,7 @@ func (b *userBiz) ChangePassword(ctx context.Context, rq *apiv1.ChangePasswordRe
 	return &apiv1.ChangePasswordResponse{}, nil
 }
 
-// Create 实现 UserBiz 接口中的 Create 方法
+// Create 实现 UserBiz 接口中的 Create 方法.
 func (b *userBiz) Create(ctx context.Context, rq *apiv1.CreateUserRequest) (*apiv1.CreateUserResponse, error) {
 	var userM model.UserM
 	_ = copier.Copy(&userM, rq)
@@ -132,7 +131,7 @@ func (b *userBiz) Create(ctx context.Context, rq *apiv1.CreateUserRequest) (*api
 	return &apiv1.CreateUserResponse{UserID: userM.UserID}, nil
 }
 
-// Update 实现 UserBiz 接口中的 Update 方法
+// Update 实现 UserBiz 接口中的 Update 方法.
 func (b *userBiz) Update(ctx context.Context, rq *apiv1.UpdateUserRequest) (*apiv1.UpdateUserResponse, error) {
 	userM, err := b.store.User().Get(ctx, where.T(ctx))
 	if err != nil {
@@ -159,7 +158,7 @@ func (b *userBiz) Update(ctx context.Context, rq *apiv1.UpdateUserRequest) (*api
 	return &apiv1.UpdateUserResponse{}, nil
 }
 
-// Delete 实现 UserBiz 接口中的 Delete 方法
+// Delete 实现 UserBiz 接口中的 Delete 方法.
 func (b *userBiz) Delete(ctx context.Context, rq *apiv1.DeleteUserRequest) (*apiv1.DeleteUserResponse, error) {
 	// 只有 `root` 用户可以删除用户，并且可以删除其他用户
 	// 所以这里不用 where.T(), 因为 where.T() 会查询 `root` 用户自己
@@ -175,7 +174,7 @@ func (b *userBiz) Delete(ctx context.Context, rq *apiv1.DeleteUserRequest) (*api
 	return &apiv1.DeleteUserResponse{}, nil
 }
 
-// Get 实现 UserBiz 接口中的 Get 方法
+// Get 实现 UserBiz 接口中的 Get 方法.
 func (b *userBiz) Get(ctx context.Context, rq *apiv1.GetUserRequest) (*apiv1.GetUserResponse, error) {
 	userM, err := b.store.User().Get(ctx, where.T(ctx))
 	if err != nil {
@@ -185,7 +184,7 @@ func (b *userBiz) Get(ctx context.Context, rq *apiv1.GetUserRequest) (*apiv1.Get
 	return &apiv1.GetUserResponse{User: conversion.UserModelToUserV1(userM)}, nil
 }
 
-// List 实现 UserBiz 接口中的 List 方法
+// List 实现 UserBiz 接口中的 List 方法.
 func (b *userBiz) List(ctx context.Context, rq *apiv1.ListUserRequest) (*apiv1.ListUserResponse, error) {
 	whr := where.P(int(rq.GetOffset()), int(rq.GetLimit()))
 	if contextx.Username(ctx) != known.AdminUsername {
@@ -240,7 +239,7 @@ func (b *userBiz) List(ctx context.Context, rq *apiv1.ListUserRequest) (*apiv1.L
 	return &apiv1.ListUserResponse{TotalCount: count, Users: users}, nil
 }
 
-// ListWithBadPerformance 是性能交叉的实现方式（已废弃）
+// ListWithBadPerformance 是性能交叉的实现方式（已废弃）.
 func (b *userBiz) ListWithBadPerformance(ctx context.Context, rq *apiv1.ListUserRequest) (*apiv1.ListUserResponse, error) {
 	whr := where.P(int(rq.GetOffset()), int(rq.GetLimit()))
 	if contextx.Username(ctx) != known.AdminUsername {

@@ -17,8 +17,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-// Logger 定义了 miniblog 项目的日志接口
-// 该接口包含了项目中支持的日志记录方法，提供对不同日志级别的支持
+// 该接口包含了项目中支持的日志记录方法，提供对不同日志级别的支持.
 type Logger interface {
 	// Debugw 用于记录调试级别的日志，通常用于开发阶段，包含详细的调试信息
 	Debugw(msg string, kvs ...any)
@@ -42,23 +41,22 @@ type Logger interface {
 	Sync()
 }
 
-// zapLogger 是 Logger 接口的具体实现，它底层封装了 zap.Logger
+// zapLogger 是 Logger 接口的具体实现，它底层封装了 zap.Logger.
 type zapLogger struct {
 	z *zap.Logger
 }
 
-// 确保 *zapLogger 实现了 Logger 接口
-// 以下变量赋值，可以让错误在编译器就被发现
+// 以下变量赋值，可以让错误在编译器就被发现.
 var _ Logger = (*zapLogger)(nil)
 
 var (
 	mu sync.Mutex
 
-	// std 定义了默认的全局 Logger
+	// std 定义了默认的全局 Logger.
 	std = New(NewOptions())
 )
 
-// Init 初始化全局的日志对象
+// Init 初始化全局的日志对象.
 func Init(opts *Options) {
 	// 因为会给全局变量 std 赋值，所以这里对 std 变量加锁，防止出现问题
 	mu.Lock()
@@ -67,8 +65,7 @@ func Init(opts *Options) {
 	std = New(opts)
 }
 
-// New 根据提供的 Options 参数创建一个自定义的 zapLogger 对象
-// 如果 Options 参数为空，则会使用默认的 Options 配置
+// 如果 Options 参数为空，则会使用默认的 Options 配置.
 func New(opts *Options) *zapLogger {
 	// 如果 opts 为空，则使用默认配置
 	if opts == nil {
@@ -127,7 +124,7 @@ func New(opts *Options) *zapLogger {
 	return &zapLogger{z: z}
 }
 
-// Sync 调用底层 zap.Logger 的 Sync 方法，将缓存中的日志刷新到磁盘文件中。主程序需要在退出前调用 Sync
+// Sync 调用底层 zap.Logger 的 Sync 方法，将缓存中的日志刷新到磁盘文件中。主程序需要在退出前调用 Sync.
 func Sync() {
 	std.Sync()
 }
@@ -145,7 +142,7 @@ func (l *zapLogger) Debugw(msg string, kvs ...any) {
 	l.z.Sugar().Debugw(msg, kvs...)
 }
 
-// Infow 输出 info 级别的日志
+// Infow 输出 info 级别的日志.
 func Infow(msg string, kvs ...any) {
 	std.Infow(msg, kvs...)
 }
@@ -190,7 +187,7 @@ func (l *zapLogger) Fatalw(msg string, kvs ...any) {
 	l.z.Sugar().Fatalw(msg, kvs...)
 }
 
-// W 解析传入的 context，尝试提取关注的键值，并添加到 zap.Logger 结构化日志中
+// W 解析传入的 context，尝试提取关注的键值，并添加到 zap.Logger 结构化日志中.
 func W(ctx context.Context) Logger {
 	return std.W(ctx)
 }
@@ -214,7 +211,7 @@ func (l *zapLogger) W(ctx context.Context) Logger {
 	return lc
 }
 
-// clone 深度拷贝 zapLogger
+// clone 深度拷贝 zapLogger.
 func (l *zapLogger) clone() *zapLogger {
 	newLogger := *l
 	return &newLogger
