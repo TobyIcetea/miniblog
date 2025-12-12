@@ -11,7 +11,14 @@ import (
 	userv1 "github.com/TobyIcetea/miniblog/internal/apiserver/biz/v1/user"
 	"github.com/TobyIcetea/miniblog/internal/apiserver/store"
 	"github.com/TobyIcetea/miniblog/pkg/auth"
+	"github.com/google/wire"
 )
+
+// ProviderSet 是一个 Wire 的 Provider 集合，用于声明依赖注入的规则.
+// 包含 NewBiz 构造哈数，用于生成 biz 实例.
+// wire.Bind 用于将接口 IBiz 与具体实现 *biz 绑定,
+// 这样依赖 IBiz 的地方会自动注入 *biz 实例
+var ProviderSet = wire.NewSet(NewBiz, wire.Bind(new(IBiz), new(*biz)))
 
 // IBiz 定义了业务层需要实现的方法.
 type IBiz interface {
